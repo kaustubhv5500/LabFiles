@@ -1,0 +1,98 @@
+---
+title: "STC LAB 1 : Statistical Measures"
+author:
+  - name : "Kaustubh Venkatesh"
+  - name : "UID : 2018120033"
+  - name : "Date : 10-08-2020"
+output:
+  html_notebook: default
+  pdf_document: default
+---
+```{r}
+#Version info
+version
+```
+
+```{r}
+library(e1071)
+attach(mtcars)
+```
+
+```{r}
+#contents of the dataset
+head(mtcars)
+```
+
+```{r}
+m = mean(mtcars$mpg)
+cat("Mean of mpg :",m)
+```
+```{r}
+med = median(mtcars$mpg)
+cat("Median of mpg : ",med)
+```
+
+```{r}
+print("Quartiles of mpg:")
+quantile(mtcars$mpg)
+```
+```{r}
+print("Percentile of mpg : ")
+quantile(mtcars$mpg , c(.32, .57, .98)) 
+```
+```{r}
+ran = range(mtcars$mpg)
+cat("Range of mpg : ",ran)
+```
+```{r}
+iqr = IQR(mtcars$mpg)
+cat("Inter Quartile Range of mpg : ",iqr)
+```
+```{r}
+print('Box plot of mpg : ')
+boxplot(mtcars$mpg, horizontal=TRUE)
+title(main="box plot",xlab="mpg")
+```
+
+```{r}
+v = var(mtcars$mpg)
+cat('Variance of mpg : ',v)
+```
+```{r}
+sd = sqrt(v)
+cat('Standard Deviation of mpg : ',sd)
+```
+```{r}
+c = cov(mtcars$mpg,mtcars$wt)
+cat('Coovariance of mpg and weight : ',c)
+```
+```{r}
+cat("Corelation co-efficient of mpg and weight : ",cor(mtcars$mpg,mtcars$wt))
+```
+```{r}
+mom = moment(mtcars$mpg, order=3, center=TRUE)
+cat('Third central moment of mpg : ',mom)
+```
+```{r}
+cat("Skewness of mpg : ",skewness(mtcars$mpg))
+```
+```{r}
+cat("Kurtosis of mpg : ",kurtosis(mtcars$mpg))
+```
+
+```{r}
+detach(mtcars)
+
+```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+<strong>Conclusion : </strong>
+<br/>
+From the experiment conducted, it can be concluded that e1701 is an important library in R which includes functions to compute various statistical measures which help us analyse the data. This is an important step in data science as it allows us to explore the data and find significant patterns and trends in it.
+
+</div>
+
+
+

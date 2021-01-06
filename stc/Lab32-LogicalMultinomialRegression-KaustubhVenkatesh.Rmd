@@ -1,0 +1,73 @@
+---
+title: 'STC LAB 3-2 : Logistic & Multinomial  Regression'
+author:
+  - name : "Kaustubh Venkatesh"
+  - name : "UID : 2018120033"
+  - name : "Date : 24-08-2020"
+output: 
+    html_notebook: default
+---
+
+```{r}
+#R version info
+version
+```
+```{r}
+#Reading the dataset
+df = read.csv("binary.csv")
+head(df)
+```
+```{r}
+#Structure of data frame
+str(df)
+```
+
+```{r}
+#Data pre-processing
+df$admit = as.factor(df$admit)
+
+#Using xtabs to analyse the relationship of the data
+xtabs(~admit + rank, data = df)
+```
+```{r}
+#Splitting data into test and train data-sets making sure pattern can be reproduced
+set.seed(1234)
+ind = sample(2, nrow(df), replace = TRUE, prob = c(0.80,0.20))
+test = df[ind==1,]
+train = df[ind==2,]
+head(test)
+```
+
+```{r}
+#Building the regression model
+#Response variable : admit
+#Independent variables : gre, gpa, rank
+clf = glm(admit~ gpa + rank, data = df, family = 'binomial')
+summary(clf)
+```
+```{r}
+#Coefficients of the model created
+coefficients(clf)
+```
+```{r}
+#Predicting outcomes of test data-set using the model generated
+pred = predict(clf , test, type = 'response')
+head(pred)
+```
+```{r}
+#To evaluate model performance, accuracy and mis-classification using confusion matrix
+pred2 = ifelse(pred > 0.5, 1, 0)
+tab = table(Predicted = pred2, Actual = test$admit)
+acc = sum(diag(tab))/sum(tab)
+tab
+cat("Accuracy : ", acc*100, "%")
+```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+<strong>Conclusion : </strong>
+<br/>
+From the experiment conducted, it can be concluded that logistic and multi-nomial regression is used to model the probability of a certain class or event existing such as pass/fail, win/lose etc. Each object being detected in the image would be assigned a probability between 0 and 1, with a sum of one. R has an inbuilt function glm() which allows us to generate a general linear regression model using the data provided to it,
+
+</div>

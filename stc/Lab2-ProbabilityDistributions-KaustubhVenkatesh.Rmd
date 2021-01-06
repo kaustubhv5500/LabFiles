@@ -1,0 +1,113 @@
+---
+title: "STC LAB 2A : Probablilty Distributions"
+author:
+  - name : "Kaustubh Venkatesh"
+  - name : "UID : 2018120033"
+  - name : "Date : 12-10-2020"
+output:
+  html_notebook: default
+  pdf_document: default
+---
+```{r}
+#Version information
+version
+```
+```{r}
+#Binomial distribution
+#To find the probability of having four or less correct answers by random attempts, we apply the function dbinom with x = 0,1,2,3,4. or the pbinom function with x = 4
+db = pbinom(4, size = 12, prob = 0.2)
+cat('The probability is : ', db)
+```
+
+
+```{r}
+#Poisson's Distribution
+#The probability of having seventeen or more cars crossing the bridge in a minute is in the upper tail of the probability density function.
+prob = ppois(16, lambda=12, lower=FALSE)   # upper tail 
+cat('The Probability is : ', prob)
+```
+```{r}
+#Continuous uniform distribution
+#We apply the generation function runif of the uniform distribution to generate ten random numbers between one and three.
+ran = runif(10, min=1, max=3)
+cat('The random numbers are : ', ran)
+```
+
+```{r}
+#Exponential Distribution
+#We can apply the function pexp of the exponential distribution with rate=1/3 to find out the probability
+p = pexp(2, rate=1/3) 
+cat('The probability is : ', p)
+```
+
+```{r}
+#Normal Distribution
+#Since we are looking for the percentage of students scoring higher than 84, we are interested in the upper tail of the normal distribution.
+
+norm = pnorm(84, mean=72, sd=15.2, lower.tail=FALSE)
+cat('The probability is', norm)
+```
+```{r}
+#Chi-squared distribution
+#We apply the quantile function qchisq of the Chi-Squared distribution against the decimal values 0.95.
+per = qchisq(0.95, df=7)        # 7 degrees of freedom 
+cat('The 95th percentile is : ', per)
+```
+```{r}
+#Student t distribution
+#We apply the quantile function qt of the Student t distribution against the decimal values 0.025 and 0.975.
+quant = qt(c(.025, .975), df=5)   # 5 degrees of freedom 
+cat('The 2.5th and 97.5th percentiles of the distribution are : ', quant )
+```
+```{r}
+#F Distribution
+#We apply the quantile function qf of the F distribution against the decimal value 0.95.
+q = qf(.95, df1=5, df2=2) 
+cat('The 95th percentile of the distribution is : ', q)
+```
+
+```{r}
+set.seed(3000)
+xseq<- seq(-4,4,.01)
+densities<- dnorm(xseq, 0,1)
+cumulative<- pnorm(xseq, 0, 1)
+randomdeviates<- rnorm(1000,0,1)
+par(mfrow=c(1,3), mar=c(3,4,4,2))
+plot(xseq, densities, col="darkgreen",xlab="", ylab="Density", type="l",lwd=2, cex=2, main="PDF of Standard Normal", cex.axis=.8)
+```
+```{r}
+plot(xseq, cumulative, col="darkorange", xlab="", ylab="Cumulative Probability",type="l",lwd=2, cex=2, main="CDF of Standard Normal", cex.axis=.8)
+```
+
+```{r}
+hist(randomdeviates, main="Random draws from Std Normal", cex.axis=.8, xlim=c(4,4))
+
+```
+```{r}
+#Creates a normal distribution with mean 100 and sd 15 and plots line and histogram plot
+#This generates 1000 i. i. d. normal random numbers (first line), plots their histogram (second line), and graphs the p. d. f. of the same normal distribution (third and forth lines).
+x <- rnorm(1000, mean=100, sd=15)
+hist(x, probability=TRUE)
+xx <- seq(min(x), max(x), length=100)
+lines(xx, dnorm(xx, mean=100, sd=15))
+
+```
+```{r}
+#Question : What is P(X > 19) when X has the N(17.46, 375.67) distribution? 
+#We use the pnorm function with upper tail as we need to find the probability of X>19
+ans = pnorm(19, mean = 17.46, sd = sqrt(375.67), lower.tail = FALSE)
+cat('The probability is : ', ans)
+```
+
+
+
+
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+<strong>Conclusion : </strong>
+<br/>
+From the experiment conducted, it can be concluded that various real world problems can be solved using standard probability distributions such as normal, poisson's, exponential etc. Functions to calculate probabilities, densities, quantiles and random variables based on these distributions are inbuilt in R, which makes it a very powerful tool.   
+</div>

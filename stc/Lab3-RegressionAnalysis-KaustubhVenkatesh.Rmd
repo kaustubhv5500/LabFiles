@@ -1,0 +1,77 @@
+---
+title: "STC LAB 3 : Regression Analysis"
+author:
+  - name : "Kaustubh Venkatesh"
+  - name : "UID : 2018120033"
+  - name : "Date : 10-08-2020"
+output:
+  html_notebook: default
+---
+```{r}
+#R version info
+version
+```
+
+```{r}
+library(lattice)
+library(DAAG)
+library(ggplot2)
+df = mtcars
+head(mtcars)
+```
+
+```{r}
+#Simple linear regression model development
+ggplot(data=df, aes(x=wt, y=mpg)) +
+  geom_point() +
+  stat_smooth(method = "lm", col = "red")
+```
+```{r}
+#boxplot of wt vs mpg
+boxplot(mtcars$mpg, horizontal=TRUE)
+title(main="box plot of mpg vs wt",xlab="mpg")
+```
+```{r}
+d <- density(mtcars$mpg)
+plot(d, main="Kernel Density of Miles Per Gallon")
+polygon(d, col="red", border="blue")
+```
+
+
+```{r}
+#building the simple linear regression model
+model = lm(mpg ~ wt, data=df)
+summary(model)
+```
+
+```{r}
+#choosing random value of weight to predict value of mpg
+test = data.frame(wt=3.65)
+pred = predict(model,test)
+coefficients((model))
+cat("Correlation between weight and mpg is : ", cor(df$mpg,df$wt))
+cat("\nPredicted value : ",pred)
+```
+```{r}
+#multiple linear regression wrt weight, automatic and horsepower
+multimodel = lm(mpg ~ wt + am + hp, data = df)
+summary(multimodel)
+```
+```{r}
+#Test date to predict the value of mpg based on multiple regression
+test1 = data.frame(wt = 3.69, am = 1, hp = 100)
+pred_multi = predict(multimodel, test1)
+coefficients(multimodel)
+cat("Predicted value : ", pred_multi)
+```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+<strong>Conclusion : </strong>
+<br/>
+From the experiment conducted, it can be concluded that regression is an important statistical tool which helps us determine 
+relations between different attributes in a dataset which then allows us to predict values based on different features.
+R contains various functions which allow us to  visualise data graphically as well as to build simple and multiple linear regression models.
+
+</div>
