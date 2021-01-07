@@ -73,7 +73,7 @@ def dnn_predict():
     encoded_data_array_imag = []
     
     # Trains the model for 500 iterations
-    while n<15:
+    while n < 25000:
         
         input_data_array.append(input_data)
         output_data_array.append(output_data)
@@ -91,7 +91,8 @@ def dnn_predict():
         # print('input_data : ',input_data)
         # print('output_data : ',output_data)
         
-        time.sleep(1.0 / (10))
+        time.sleep(0.1)
+        print(n)
         
     data_set = pd.DataFrame({"input_data": input_data_array,
                              "output_data": output_data_array,
@@ -101,7 +102,7 @@ def dnn_predict():
                              "transmitted_data_imag": transmitted_data_array_imag,
                              "encoded_data_real": encoded_data_array_real,
                              "encoded_data_imag":encoded_data_array_imag})
-    print(data_set.dtypes)
+    data_set.to_csv('signal_data.csv')
         
 class tx_ofdm(gr.top_block, Qt.QWidget):
 
@@ -360,7 +361,7 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
                     self.set_output_signal(val)
                 except AttributeError:
                     pass
-                time.sleep(0.18)
+                time.sleep(0.0911)
         _output_signal_thread = threading.Thread(target=_output_signal_probe)
         _output_signal_thread.daemon = True
         _output_signal_thread.start()
