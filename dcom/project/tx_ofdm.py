@@ -6,7 +6,7 @@
 #
 # GNU Radio Python Flow Graph
 # Title: OFDM Tx
-# Description: Deep learning based OFDM Transmitter
+# Description: Deep leaning based OFDM Transmitter
 # GNU Radio version: 3.8.1.0
 
 from distutils.version import StrictVersion
@@ -40,10 +40,10 @@ from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
 from gnuradio.digital.utils import tagged_streams
 import time
-import threading
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import tensorflow as tf
+import threading
 from gnuradio import qtgui
 
 input_data = 0
@@ -51,16 +51,18 @@ encoded_data = 0
 output_data = 0
 transmitted_data = 0
 received_data = 0
+decoded_signal = 0
 n = 0
 
 
 # Complete function to add deep learning
-def dnn_predict():
+def dnn_extract():
     global input_data
     global output_data
     global received_data
     global transmitted_data
     global encoded_data
+    global decoded_signal
     global n
     
     input_data_array = []
@@ -71,9 +73,11 @@ def dnn_predict():
     transmitted_data_array_imag = []
     encoded_data_array_real = []
     encoded_data_array_imag = []
+    decoded_data_array_real = []
+    decoded_data_array_imag = []
     
-    # Trains the model for 500 iterations
-    while n < 25000:
+    # Trains the model for 150,000 iterations
+    while n < 150000:
         
         input_data_array.append(input_data)
         output_data_array.append(output_data)
@@ -85,6 +89,9 @@ def dnn_predict():
         received_data_array_imag.append(received_data.imag)
         transmitted_data_array_imag.append(transmitted_data.imag)
         encoded_data_array_imag.append(encoded_data.imag)
+        
+        decoded_data_array_real.append(decoded_signal.real)
+        decoded_data_array_imag.append(decoded_signal.imag)
         
         n += 1
         
@@ -101,10 +108,13 @@ def dnn_predict():
                              "transmitted_data_real": transmitted_data_array_real,
                              "transmitted_data_imag": transmitted_data_array_imag,
                              "encoded_data_real": encoded_data_array_real,
-                             "encoded_data_imag":encoded_data_array_imag})
+                             "encoded_data_imag":encoded_data_array_imag,
+                             "decoded_data_real":decoded_data_array_real,
+                             "decoded_data_imag":decoded_data_array_imag})
+    # print(data_set)
     data_set.to_csv('signal_data.csv')
-        
-class tx_ofdm(gr.top_block, Qt.QWidget):
+    
+class tx_ofdm_updated(gr.top_block, Qt.QWidget):
 
     def __init__(self):
         gr.top_block.__init__(self, "OFDM Tx")
@@ -127,8 +137,8 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "tx_ofdm")
-        
+        self.settings = Qt.QSettings("GNU Radio", "tx_ofdm_updated")
+
         try:
             if StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
                 self.restoreGeometry(self.settings.value("geometry").toByteArray())
@@ -172,10 +182,12 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         self.header_equalizer = header_equalizer = digital.ofdm_equalizer_simpledfe(fft_len, header_mod.base(), occupied_carriers, pilot_carriers, pilot_symbols)
         self.hdr_format = hdr_format = digital.header_format_ofdm(occupied_carriers, 1, length_tag_key,)
         self.fft_len_0 = fft_len_0 = 64
+        self.decoded_probe = decoded_probe = 0
 
         ##################################################
         # Blocks
         ##################################################
+        self.blocks_probe_signal_x_4 = blocks.probe_signal_c()
         self.blocks_probe_signal_x_3 = blocks.probe_signal_c()
         self.blocks_probe_signal_x_2 = blocks.probe_signal_b()
         self.blocks_probe_signal_x_0_1 = blocks.probe_signal_b()
@@ -199,14 +211,13 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         def _rx_probe_probe():
             global received_data
             while True:
-                
+
                 val = self.blocks_probe_signal_x_3.level()
                 received_data = val
                 try:
                     self.set_rx_probe(val)
                 except AttributeError:
                     pass
-                
                 time.sleep(1.0 / (10))
         _rx_probe_thread = threading.Thread(target=_rx_probe_probe)
         _rx_probe_thread.daemon = True
@@ -355,12 +366,14 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         def _output_signal_probe():
             global output_data
             while True:
+
                 val = self.blocks_probe_signal_x_0_1.level()
                 output_data = val
                 try:
                     self.set_output_signal(val)
                 except AttributeError:
                     pass
+                # time.sleep(1.0 / (10))
                 time.sleep(0.0911)
         _output_signal_thread = threading.Thread(target=_output_signal_probe)
         _output_signal_thread.daemon = True
@@ -369,13 +382,13 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         def _og_signal_probe_probe():
             global encoded_data
             while True:
+
                 val = self.blocks_probe_signal_x_0_0_0.level()
                 encoded_data = val
                 try:
                     self.set_og_signal_probe(val)
                 except AttributeError:
                     pass
-                
                 time.sleep(1.0 / (10))
         _og_signal_probe_thread = threading.Thread(target=_og_signal_probe_probe)
         _og_signal_probe_thread.daemon = True
@@ -384,13 +397,13 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         def _input_signal_probe():
             global input_data
             while True:
+
                 val = self.blocks_probe_signal_x_2.level()
                 input_data = val
                 try:
                     self.set_input_signal(val)
                 except AttributeError:
                     pass
-                
                 time.sleep(1.0 / (10))
         _input_signal_thread = threading.Thread(target=_input_signal_probe)
         _input_signal_thread.daemon = True
@@ -427,6 +440,21 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         self.digital_constellation_decoder_cb_0 = digital.constellation_decoder_cb(header_mod.base())
         self.digital_chunks_to_symbols_xx_0_0 = digital.chunks_to_symbols_bc(payload_mod.points(), 1)
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc(header_mod.points(), 1)
+        def _decoded_probe_probe():
+            global decoded_signal
+            while True:
+
+                val = self.blocks_probe_signal_x_4.level()
+                decoded_signal = val
+                try:
+                    self.set_decoded_probe(val)
+                except AttributeError:
+                    pass
+                time.sleep(1.0 / (10))
+        _decoded_probe_thread = threading.Thread(target=_decoded_probe_probe)
+        _decoded_probe_thread.daemon = True
+        _decoded_probe_thread.start()
+
         self.channels_channel_model_0_0 = channels.channel_model(
             noise_voltage=0.15,
             frequency_offset=0 * 1.0/fft_len,
@@ -495,6 +523,7 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
         self.connect((self.digital_ofdm_frame_equalizer_vcvc_0, 0), (self.digital_ofdm_serializer_vcc_header, 0))
         self.connect((self.digital_ofdm_frame_equalizer_vcvc_1, 0), (self.digital_ofdm_serializer_vcc_payload, 0))
         self.connect((self.digital_ofdm_serializer_vcc_header, 0), (self.digital_constellation_decoder_cb_0, 0))
+        self.connect((self.digital_ofdm_serializer_vcc_payload, 0), (self.blocks_probe_signal_x_4, 0))
         self.connect((self.digital_ofdm_serializer_vcc_payload, 0), (self.digital_constellation_decoder_cb_1, 0))
         self.connect((self.digital_ofdm_sync_sc_cfb_0, 0), (self.analog_frequency_modulator_fc_0, 0))
         self.connect((self.digital_ofdm_sync_sc_cfb_0, 1), (self.digital_header_payload_demux_0, 1))
@@ -505,7 +534,7 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "tx_ofdm")
+        self.settings = Qt.QSettings("GNU Radio", "tx_ofdm_updated")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
@@ -723,11 +752,18 @@ class tx_ofdm(gr.top_block, Qt.QWidget):
 
     def set_fft_len_0(self, fft_len_0):
         self.fft_len_0 = fft_len_0
-        
+
+    def get_decoded_probe(self):
+        return self.decoded_probe
+
+    def set_decoded_probe(self, decoded_probe):
+        self.decoded_probe = decoded_probe
 
 
 
-def main(top_block_cls=tx_ofdm, options=None):
+
+
+def main(top_block_cls=tx_ofdm_updated, options=None):
     global n
     
     if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
@@ -738,9 +774,9 @@ def main(top_block_cls=tx_ofdm, options=None):
     tb = top_block_cls()
 
     tb.start()
-    dnn_predict()
+    dnn_extract()
     tb.show()
-  
+
     def sig_handler(sig=None, frame=None):
         Qt.QApplication.quit()
 

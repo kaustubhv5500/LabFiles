@@ -10,7 +10,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: tx_ofdm
+    id: tx_ofdm_updated
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -32,6 +32,22 @@ options:
     state: enabled
 
 blocks:
+- name: decoded_probe
+  id: variable_function_probe
+  parameters:
+    block_id: blocks_probe_signal_x_4
+    comment: ''
+    function_args: ''
+    function_name: level
+    poll_rate: '10'
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1160, 724.0]
+    rotation: 0
+    state: true
 - name: fft_len
   id: variable
   parameters:
@@ -666,7 +682,7 @@ blocks:
     coordinate: [432, 1656.0]
     rotation: 0
     state: enabled
-- name: blocks_probe_signal_x_3
+- name: blocks_probe_signal_x_4
   id: blocks_probe_signal_x
   parameters:
     affinity: ''
@@ -677,9 +693,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [504, 816.0]
+    coordinate: [344, 2224.0]
     rotation: 0
-    state: disabled
+    state: true
 - name: blocks_repack_bits_bb_0
   id: blocks_repack_bits_bb
   parameters:
@@ -1902,7 +1918,6 @@ connections:
 - [blocks_throttle_0_0, '0', blocks_delay_0, '0']
 - [blocks_throttle_0_0, '0', blocks_probe_signal_x_3, '0']
 - [blocks_throttle_0_0, '0', digital_ofdm_sync_sc_cfb_0, '0']
-- [blocks_throttle_1, '0', blocks_probe_signal_x_3, '0']
 - [blocks_throttle_1, '0', digital_ofdm_rx_0, '0']
 - [channels_channel_model_0, '0', blocks_throttle_1, '0']
 - [channels_channel_model_0_0, '0', blocks_throttle_0_0, '0']
@@ -1938,6 +1953,7 @@ connections:
 - [virtual_source_0_0_0_0, '0', blocks_multiply_const_vxx_0, '0']
 - [virtual_source_0_0_0_1, '0', blocks_probe_signal_x_0_0_0, '0']
 - [virtual_source_0_0_0_1, '0', qtgui_time_sink_x_0_0, '0']
+- [virtual_source_0_0_1, '0', blocks_probe_signal_x_4, '0']
 - [virtual_source_0_0_1, '0', digital_constellation_decoder_cb_1, '0']
 - [virtual_source_0_1, '0', fft_vxx_0_0, '0']
 - [virtual_source_1, '0', channels_channel_model_0, '0']
