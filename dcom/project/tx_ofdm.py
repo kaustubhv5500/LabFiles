@@ -6,7 +6,7 @@
 #
 # GNU Radio Python Flow Graph
 # Title: OFDM Tx
-# Description: Deep leaning based OFDM Transmitter
+# Description: Deep learning based OFDM Transmitter
 # GNU Radio version: 3.8.1.0
 
 from distutils.version import StrictVersion
@@ -55,7 +55,7 @@ decoded_signal = 0
 n = 0
 
 
-# Complete function to add deep learning
+# Function to extract data for training the ML models
 def dnn_extract():
     global input_data
     global output_data
@@ -450,7 +450,8 @@ class tx_ofdm_updated(gr.top_block, Qt.QWidget):
                     self.set_decoded_probe(val)
                 except AttributeError:
                     pass
-                time.sleep(1.0 / (10))
+                # time.sleep(1.0 / (10))
+                time.sleep(0.0911)
         _decoded_probe_thread = threading.Thread(target=_decoded_probe_probe)
         _decoded_probe_thread.daemon = True
         _decoded_probe_thread.start()
@@ -774,7 +775,7 @@ def main(top_block_cls=tx_ofdm_updated, options=None):
     tb = top_block_cls()
 
     tb.start()
-    dnn_extract()
+    # dnn_extract()
     tb.show()
 
     def sig_handler(sig=None, frame=None):
