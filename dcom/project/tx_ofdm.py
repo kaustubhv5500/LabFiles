@@ -140,7 +140,7 @@ def dnn_predict():
     linear_model = joblib.load('output_linear_model.pkl')
     
     # Calculate ber for 17 frames
-    while n < 17:
+    while n < 15:
         arr = numpy.array([received_data.real,
                            received_data.imag,
                            decoded_signal.real,
@@ -153,17 +153,18 @@ def dnn_predict():
         
         if abs(linear_output - input_data) <= 10:
             diff = bit_difference(linear_output,input_data)
-            linear_ber = (((n * linear_ber) + (diff / 8))/pow(n,1.1))
+            linear_ber = (((n * linear_ber) + (diff / 16))/pow(n,1.1))
             
             diff = bit_difference(dnn_output,input_data)
-            dnn_ber = (((n * dnn_ber) + (diff / 8)/pow(n,1.12))
+            dnn_ber = ((n * dnn_ber) + (diff / 16))/pow(n,1.12)
             
             n += 1
             
             print('dnn_ber : ',dnn_ber)
             print('linear_ber :',linear_ber)
             
-        time.sleep(0.1)
+        # time.sleep(0.1)
+        time.sleep(0.0911)
         # print('dnn_output : ',dnn_output)
         # print('linear output : ',linear_output)
  
