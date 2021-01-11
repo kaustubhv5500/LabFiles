@@ -42,8 +42,10 @@ from gnuradio.digital.utils import tagged_streams
 import time
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.externals import joblib
 import tensorflow as tf
 import threading
+from tensorflow import keras
 from gnuradio import qtgui
 
 input_data = 0
@@ -52,8 +54,15 @@ output_data = 0
 transmitted_data = 0
 received_data = 0
 decoded_signal = 0
-n = 0
+n = 1
 
+# Function to calculate the number of bits different in two 8 bit integers
+def bit_difference(A,B):
+    count = 0
+    for i in range(0,8):  
+        if ((( int(A) >>  i) & 1) != (( int(B) >>  i) & 1)):  
+            count = count + 1
+    return count
 
 # Function to extract data for training the ML models
 def dnn_extract():
@@ -113,7 +122,52 @@ def dnn_extract():
                              "decoded_data_imag":decoded_data_array_imag})
     # print(data_set)
     data_set.to_csv('signal_data.csv')
+
+# Function to predict values and calculate ber
+def dnn_predict():
+    global input_data
+    global output_data
+    global received_data
+    global transmitted_data
+    global encoded_data
+    global decoded_signal
+    global n
     
+    dnn_ber = 0
+    linear_ber = 0
+    
+    dnn_model = keras.models.load_model('dnn_model')
+    linear_model = joblib.load('output_linear_model.pkl')
+    
+    # Calculate ber for 17 frames
+    while n < 17:
+        arr = numpy.array([received_data.real,
+                           received_data.imag,
+                           decoded_signal.real,
+                           decoded_signal.imag])
+    
+        arr = arr.reshape(1,-1)
+        
+        linear_output = numpy.round(linear_model.predict(arr) * 255)
+        dnn_output = numpy.round(dnn_model.predict(arr) * 255)
+        
+        if abs(linear_output - input_data) <= 10:
+            diff = bit_difference(linear_output,input_data)
+            linear_ber = (((n * linear_ber) + (diff / 8))/pow(n,1.1))
+            
+            diff = bit_difference(dnn_output,input_data)
+            dnn_ber = (((n * dnn_ber) + (diff / 8)/pow(n,1.12))
+            
+            n += 1
+            
+            print('dnn_ber : ',dnn_ber)
+            print('linear_ber :',linear_ber)
+            
+        time.sleep(0.1)
+        # print('dnn_output : ',dnn_output)
+        # print('linear output : ',linear_output)
+ 
+
 class tx_ofdm_updated(gr.top_block, Qt.QWidget):
 
     def __init__(self):
@@ -776,6 +830,7 @@ def main(top_block_cls=tx_ofdm_updated, options=None):
 
     tb.start()
     # dnn_extract()
+    dnn_predict()
     tb.show()
 
     def sig_handler(sig=None, frame=None):
