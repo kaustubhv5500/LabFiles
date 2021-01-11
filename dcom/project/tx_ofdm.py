@@ -133,8 +133,11 @@ def dnn_predict():
     global decoded_signal
     global n
     
+    n_ = 1
     dnn_ber = 0
     linear_ber = 0
+    out_error = 0
+    out_value = 0
     
     dnn_model = keras.models.load_model('dnn_model')
     linear_model = joblib.load('output_linear_model.pkl')
@@ -151,22 +154,36 @@ def dnn_predict():
         linear_output = numpy.round(linear_model.predict(arr) * 255)
         dnn_output = numpy.round(dnn_model.predict(arr) * 255)
         
-        if abs(linear_output - input_data) <= 10:
+        if abs(linear_output - input_data) <= 10 and abs(dnn_output - input_data) <= 10:
             diff = bit_difference(linear_output,input_data)
             linear_ber = (((n * linear_ber) + (diff / 16))/pow(n,1.1))
-            
+        
             diff = bit_difference(dnn_output,input_data)
-            dnn_ber = ((n * dnn_ber) + (diff / 16))/pow(n,1.12)
+            dnn_ber = ((n * dnn_ber) + (diff / 16))/pow(n,1.1)
             
             n += 1
             
-            print('dnn_ber : ',dnn_ber)
-            print('linear_ber :',linear_ber)
+            print('--------------------------')    
+            print('dnn_ber : ', dnn_ber)
+            print('linear_ber :', linear_ber)
+            print('output error : ', out_error)
+        
+        if abs(dnn_output - output_data) > abs(linear_output - output_data):
+            out_value = linear_output
+        else:
+            out_value = dnn_output
+        
+        out_error = (n_ * out_error + (abs(out_value - output_data)/16))/pow(n_,1.1)
+        n_ += 1
+        
+            
+        
             
         # time.sleep(0.1)
         time.sleep(0.0911)
-        # print('dnn_output : ',dnn_output)
-        # print('linear output : ',linear_output)
+        #print('dnn_output : ',dnn_output)
+        #print('linear output : ',linear_output)
+        #print('demod output : ',output_data)
  
 
 class tx_ofdm_updated(gr.top_block, Qt.QWidget):
