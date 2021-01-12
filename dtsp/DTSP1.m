@@ -68,22 +68,12 @@ n = max(length(x),length(h));
 
 % Appending zeros to incomplete vectors
 if length(h) < n
-    h = [h, zeros(n - length(h))];
+    h = [h, zeros(1,(n - length(h)))];
 else
-    x = [x, zeros(n - length(x))];
+    x = [x, zeros(1,(n - length(x)))];
 end
 
-for i=1:n
-    y(1,n) = 0;
-    for j=1:n
-    k = i - j + 1;
-        if k <= 0 
-            k = n + k;
-        end
-       y(i) = y(i) + x(j) * h(k);
-    end
-end
-
+y = CircularConv(x,h,n);
 disp('Circular Convolution Output : ');
 disp(y);
 
@@ -94,8 +84,40 @@ xlabel('n','FontSize',20);
 ylabel('Magnitude','FontSize',20);
 set(ax,'xlim',[0 7],'ylim',[min(y) max(y)],'xtick',[0:1:7],'fontsize',20);
 grid on;
+figure();
 
+% Linear Convolution using circular convolution
+clear i j y n x h;
+x =[-14,-12,10,-8];
+h = [1,5,10];
+n = length(x) + length(h) - 1;
+h = [h, zeros(1,(n - length(h)))];
+x = [x, zeros(1,(n - length(x)))];
+y = CircularConv(x,h,n);
 
-        
+disp('Linear Convolution using Circular Convolution Output : ');
+disp(y);
+
+stem(y,'r','LineWidth',3);
+ax = gca();
+title('Plot of Linear Convolution Output using Circular Convolution','FontSize',20);
+xlabel('n','FontSize',20);
+ylabel('Magnitude','FontSize',20);
+set(ax,'xlim',[0 7],'ylim',[min(y) max(y)],'xtick',[0:1:7],'fontsize',20);
+grid on;
+
+function y = CircularConv(x,h,n)
+
+    for i=1:n
+        y(1,n) = 0;
+        for j=1:n
+        k = i - j + 1;
+            if k <= 0 
+                k = n + k;
+            end
+        y(i) = y(i) + x(j) * h(k);
+        end
+    end
+end
 
         
