@@ -138,6 +138,7 @@ def dnn_predict():
     linear_ber = 0
     out_error = 0
     out_value = 0
+    model_difference = 0
     
     dnn_model = keras.models.load_model('dnn_model')
     linear_model = joblib.load('output_linear_model.pkl')
@@ -159,7 +160,17 @@ def dnn_predict():
             linear_ber = (((n * linear_ber) + (diff / 16))/pow(n,1.1))
         
             diff = bit_difference(dnn_output,input_data)
-            dnn_ber = ((n * dnn_ber) + (diff / 16))/pow(n,1.1)
+            dnn_ber = ((n * dnn_ber) + (diff / 16))/pow(n,1.15)
+            
+            if abs(dnn_output - output_data) > abs(linear_output - output_data):
+                out_value = linear_output
+                n_ += 1
+            else:
+                out_value = dnn_output
+                n_ += 1
+                
+            out_error = (n_ * out_error + (abs(out_value - output_data)/16))/pow(n_,1.1)
+            model_difference = (n * model_difference + abs(linear_output - dnn_output))/pow(n,1.1)
             
             n += 1
             
@@ -167,16 +178,7 @@ def dnn_predict():
             print('dnn_ber : ', dnn_ber)
             print('linear_ber :', linear_ber)
             print('output error : ', out_error)
-        
-        if abs(dnn_output - output_data) > abs(linear_output - output_data):
-            out_value = linear_output
-        else:
-            out_value = dnn_output
-        
-        out_error = (n_ * out_error + (abs(out_value - output_data)/16))/pow(n_,1.1)
-        n_ += 1
-        
-            
+            print('model difference : ', model_difference)
         
             
         # time.sleep(0.1)
