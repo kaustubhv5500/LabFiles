@@ -15,6 +15,7 @@ void BubbleSort(int arr[], int n){
 	}
 }
 
+// function to implement binary search on the sorted array
 int BinarySearch(int arr[], int n, int query){
 
 	int low = 0;
@@ -34,6 +35,7 @@ int BinarySearch(int arr[], int n, int query){
 
 	return -1;
 }
+
 int main(){
 	int arr[200];
 	int n;
@@ -66,4 +68,6 @@ int main(){
 	else{
 		printf("The element was found at location : %d\n", index + 1);
 	}
+
+	return 0;
 }
