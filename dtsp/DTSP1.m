@@ -54,7 +54,7 @@ disp(y);
 
 stem(y,'r','LineWidth',3);
 ax = gca();
-title('Plot of Linear convolution output y(n)','FontSize',20);
+title('Plot of Linear convolution','FontSize',20);
 xlabel('n','FontSize',20);
 ylabel('Magnitude','FontSize',20);
 set(ax,'xlim',[0 7],'ylim',[min(y) max(y)],'xtick',[0:1:7],'fontsize',20);
@@ -79,7 +79,7 @@ disp(y);
 
 stem(y,'r','LineWidth',3);
 ax = gca();
-title('Plot of Circular convolution output y(n)','FontSize',20);
+title('Circular convolution y(n)','FontSize',20);
 xlabel('n','FontSize',20);
 ylabel('Magnitude','FontSize',20);
 set(ax,'xlim',[0 7],'ylim',[min(y) max(y)],'xtick',[0:1:7],'fontsize',20);
@@ -100,10 +100,10 @@ disp(y);
 
 stem(y,'r','LineWidth',3);
 ax = gca();
-title('Plot of Linear Convolution Output using Circular Convolution','FontSize',20);
+title('Linear Convolution using Circular Convolution');
 xlabel('n','FontSize',20);
 ylabel('Magnitude','FontSize',20);
-set(ax,'xlim',[0 7],'ylim',[min(y) max(y)],'xtick',[0:1:7],'fontsize',20);
+set(ax,'xlim',[0 7],'ylim',[min(y) max(y)],'xtick',[0:1:7],'fontsize',15);
 grid on;
 
 function y = CircularConv(x,h,n)

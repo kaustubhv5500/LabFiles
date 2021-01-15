@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\ESR1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\ESR1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6150002: Last Updated: Sat Jan  9 14:46:33 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6150002: Last Updated: Thu Jan 14 10:28:09 2021
 <BR><P>
-<H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize)</H3><H3>
+<H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 
 <P>
@@ -17,10 +17,17 @@ Functions with no stack information
 </UL>
 <P>
 <H3>
+Function Pointers
+</H3><UL>
+ <LI><a href="#[0]">Reset_Handler</a> from main.o(MYCODE) referenced from main.o(RESET)
+</UL>
+<P>
+<H3>
 Global Symbols
 </H3>
-<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(Main))
-<P>
+<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(MYCODE))
+<BR>[Address Reference Count : 1]<UL><LI> main.o(RESET)
+</UL><P>
 <H3>
 Local Symbols
 </H3><P>
