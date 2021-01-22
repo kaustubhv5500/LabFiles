@@ -141,7 +141,7 @@ def dnn_predict():
     model_difference = 0
     ber = 0
     
-    snr = 4
+    snr = 2
     model = 'bpsk'
     
     if model == 'qpsk':
@@ -194,12 +194,12 @@ def dnn_predict():
             print('--------------------------')
             print('ber : ',ber*100)
             print('dnn_ber : ', dnn_ber/2)
-            print('linear_ber :', linear_ber)
+            print('linear_ber :', linear_ber*(pow(2,(snr/4))))
             #print('output error : ', out_error)
             print('model difference : ', model_difference)
             #print('dnn_output : ',dnn_output)
             #print('linear output : ',linear_output)
-            print('packet number : ', n)
+            print('packets processed : ', n*10)
             #print('demod output : ',output_data)
  
         

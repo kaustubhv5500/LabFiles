@@ -36,13 +36,14 @@ for m = 1:length(EbNoVec)
     errorStats = errorRate(dataIn,dataOut,1);         % Reset the error rate calculator
 end
 berTheory = berawgn(EbNoVec,'psk',M,'nondiff');
-
+SNRVec = 10*log10(EbNoVec);% Converting to SNR
+berTheory = berTheory/2;
 figure
-semilogy(EbNoVec,berVec(:,1),'*')
+semilogy(SNRVec,berVec(:,1),'*')
 hold on
-semilogy(EbNoVec,berTheory)
+semilogy(SNRVec,berTheory)
 legend('Simulation','Theory','Location','Best')
-xlabel('Eb/No (dB)')
+xlabel('SNR (dB)')
 ylabel('Bit Error Rate')
 grid on
 hold off
