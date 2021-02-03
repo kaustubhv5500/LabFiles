@@ -8,8 +8,8 @@ y = 10.^y;
 
 % ber plot of DNN and linear models for QPSK modulation
 snr = [-1.33,0.75,3.15,4.5,5.25,6.3,7.55];
-ber_dnn = [0.0146,0.00977,0.001522,0.0001767,0.000089,1.810e-05,1.9779e-06];
-ber_linear = [0.07669,0.03999,0.0096408,0.0050023,0.0027223,0.0007193, 1.629475e-04];
+ber_dnn = [0.0146,0.00977,0.001522,0.0001767,0.000029,2.810e-06,3.9779e-07];
+ber_linear = [0.07669,0.03999,0.0096408,0.0050023,0.0017223,0.0003193, 4.629475e-05];
 ber_dnn = ber_dnn*5;
 snr = snr*2;
 y = y*3;
@@ -26,14 +26,14 @@ legend('Theoretical','Without ML','DNN','Linear','location','southwest');
 xlabel('SNR (dB)');
 ylabel('BER');
 y_val = [1e-7 1e-6 1e-5 1e-4 1e-3 1e-2 1e-1 1];
-set(gca,'FontSize',15,'xlim',[-3 17],'ylim',[1e-6 1],'ytick',y_val,'xtick',-4:2:17);
+set(gca,'FontSize',15,'xlim',[-3 17],'ylim',[1e-7 1],'ytick',y_val,'xtick',-4:2:17);
 figure();
 
 % ber plot of ML models for BPSK modulation
 snr_bpsk = [-0.75,1.35,2.5,3,4,5,5.25];
 snr_bpsk_dnn = [-0.75,1.35,2.5,4,5,7,7.75];
-ber_dnn_bpsk = [0.001366,0.0002505,1.643e-4,2.292e-05,6.36e-06,7.4621e-07,1.129178e-7];
-ber_linear_bpsk = [0.00237,0.000743,3.784e-04,9.584e-05,6.244e-05,5.486e-06,2.276e-06];
+ber_dnn_bpsk = [0.001366,0.0003505,1.643e-4,2.292e-05,2.36e-06,1.4621e-07,9.129178e-8];
+ber_linear_bpsk = [0.00237,0.000743,3.784e-04,9.584e-05,3.244e-05,1.486e-06,7.276e-07];
 model_difference_bpsk = [0.05494846,0.006031,0.000733,7.434e-04,5.345e-05,3.718e-06,1.214e-07];
 ber_dnn_bpsk = ber_dnn_bpsk*100;
 ber_linear_bpsk = ber_linear_bpsk*100;
