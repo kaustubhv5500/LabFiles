@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+//  structure definition to implement the Linked list
 struct node
 {
 	int data;
@@ -9,6 +10,7 @@ struct node
 
 int size = 0;
 
+// Function to add a node in the front of a Linked list
 struct node* insert_front(struct node *head, int new_data){
 	struct node *nn;
 	nn = malloc(sizeof(struct node));	
@@ -22,10 +24,12 @@ struct node* insert_front(struct node *head, int new_data){
 	return head;
 }
 
+// Function to add node after a given position to a Linked list
 struct node* insert_after(struct node* head, int position, int new_data)  
 {  
    	
    	struct node *current = head;
+   	int curr = 1;
 
     if (head == NULL){  
     printf("Linked List Empty!\n");      
@@ -34,23 +38,23 @@ struct node* insert_after(struct node* head, int position, int new_data)
     if(position < 1 || position > size + 1){
     	printf("Invalid Position\n");
     }
-    else{
-    	while(position--){
 
-    		if(position == 0){
-    			struct node *temp;
-				temp = malloc(sizeof(struct node));
-				temp->data = new_data;
-				temp->next = current;
-				current = temp;
-			}
-			current = current->next;
-    	}
+    
+    while(curr != position){
+    	current = current->next;
+    	curr++;
     }
+
+    struct node *temp;
+	temp = malloc(sizeof(struct node));
+	temp->data = new_data;
+	temp->next = current->next;
+	current->next = temp;
 
     return head;
 }
 
+// Function to add a node at the end of the Linked list
 struct node* insert_end(struct node* head, int new_data){
     struct node* new_node = (struct node*) malloc(sizeof(struct node)); 
   
@@ -71,6 +75,7 @@ struct node* insert_end(struct node* head, int new_data){
     return head;   
 }
 
+// Function to display the status of the linked list
 void display_ll(struct node* head){
 	printf("Status of Linked List : \n");
 	while(head != NULL){
@@ -91,25 +96,33 @@ int main(){
 			case 1: 
 			printf("Enter the data to be inserted\n");
 			scanf("%d",&data);
+
 			head = insert_front(head,data);
 			break;
+
 			case 2:
 			printf("Enter the data to be inserted\n");
 			scanf("%d",&data);
 			printf("Enter the position\n");
 			scanf("%d",&position);
+
 			head = insert_after(head,position,data);
 			break;
+
 			case 3:
 			printf("Enter the data to be inserted\n");
 			scanf("%d",&data);
+
 			head = insert_end(head,data);
 			break;
+
 			case 4 : 
 			display_ll(head);
 			break;
+
 			case 0:
 			break;
+
 			default : 
 			printf("Enter the correct Opcode\n");
 			break;

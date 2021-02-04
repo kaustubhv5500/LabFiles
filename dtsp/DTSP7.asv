@@ -34,7 +34,6 @@ set(ax,'xlim',[0 length(hd_)+1],'xtick',0:1:length(hd_)+1,'fontsize',15);
 grid on;
 figure();
 
-% Calculating hamming window coefficients
 for i=0:length(hd)-1
     WH(i+1) = 0.54 - 0.46*cos(2*pi*i/(M-1));
 end
@@ -58,7 +57,7 @@ ax = gca();
 title('Plot of h(n)','FontSize',15);
 xlabel('n','FontSize',15);
 ylabel('Magnitude','FontSize',15);
-set(ax,'xlim',[0 length(h_)+1],'xtick',0:1:length(h_)+1,'fontsize',15);
+set(ax,'xlim',[0 length(h_)+1],'xtick',0:1:length(h_)+1],'fontsize',15);
 grid on;
 figure();
 
@@ -84,7 +83,7 @@ ax = gca();
 title('Magnitude Response of Filter','FontSize',15);
 xlabel('Frequency','FontSize',15);
 ylabel('|H(w)|','FontSize',15);
-set(ax,'xlim',[-pi pi],'xtick',-pi:pi/2:pi,'fontsize',15);
+set(ax,'xlim',[-pi pi],'xtick',[-pi:pi/2:pi],'fontsize',15);
 set(ax,'XTickLabel',{'-\pi','-\pi/2','0','\pi/2','\pi'});
 figure();
 
@@ -95,6 +94,6 @@ ax = gca();
 title('Phase Response of Filter','FontSize',15);
 xlabel('Frequency','FontSize',15);
 ylabel('\angleH(w)','FontSize',15);
-set(ax,'xlim',[-pi pi],'xtick',-pi:pi/2:pi,'fontsize',15);
+set(ax,'xlim',[-pi pi],'xtick',[-pi:pi/2:pi],'fontsize',15);
 set(ax,'XTickLabel',{'-\pi','-\pi/2','0','\pi/2','\pi'});
 

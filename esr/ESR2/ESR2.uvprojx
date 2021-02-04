@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\Objects\</OutputDirectory>
-          <OutputName>ESR1</OutputName>
+          <OutputName>ESR2</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -387,11 +387,6 @@
               <FileName>main.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\main.s</FilePath>
-            </File>
-            <File>
-              <FileName>load_reg.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\load_reg.s</FilePath>
             </File>
           </Files>
         </Group>
