@@ -1,4 +1,4 @@
-% Discrete Time Signal Processing Lab 1
+% Discrete Time Signal Processing Lab 7
 % Design of FIR Filter Sampling technique/Windowing Method
 % MATLAB version R2018a
 % Date : 02-02-2021
@@ -42,7 +42,7 @@ end
 WH_ = [WH,flip(WH(1:Tau))];
 stem(WH_,'r','LineWidth',2);
 ax = gca();
-title('Plot of symmetric Hamming Window','FontSize',15);
+title('Plot of Hamming Window','FontSize',15);
 xlabel('n','FontSize',15);
 ylabel('Magnitude','FontSize',15);
 set(ax,'xlim',[0 length(WH_)+1],'xtick',0:1:length(WH_)+1,'fontsize',15);

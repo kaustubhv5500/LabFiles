@@ -1,0 +1,193 @@
+p, pre, a, input, h4{
+    font-size: 10px;
+}
+
+h3{
+    font-size: 11px;
+}
+
+pre{
+    display: none;
+    font-size: 13px;
+    color: #ff8c00;
+}
+
+.inputblock{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+    display: inline-block;
+    caret-color: white;
+}
+h2:hover{
+    color: yellow;
+    cursor: pointer;
+}
+
+input{
+    width: 100%;
+   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #fcc;
+    color: #ecec13;
+}
+
+.downloadBtn
+{
+    display: inline-block;
+    background: #5dc3d0;
+    color: rgb(82, 142, 150);
+}
+
+.btn{
+    display: inline-block;
+    text-decoration: none;
+    background: #5dc3d0;
+    color: rgb(82, 142, 150);
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    box-shadow: inset 0px 3px 0 rgba(255,255,255,0.3), 0 3px 3px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    border-bottom: solid 3px #549fa9;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.65);
+    transition: .4s;
+}
+
+.btn:active{
+    -ms-transform: translateY(1px);
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
+    border-bottom: none;
+}
+
+td{
+ valign:center;
+ padding-left: 15px;
+}
+
+p{
+    color: coral;
+}
+
+#totalContainer{
+    margin: 7%;
+    margin-top: 15px;
+    border: 1px solid #444;
+    border-radius: 12px;
+    min-height: 600px;
+    height: auto;
+    background: #444;
+}
+
+.btnContainer{
+     padding-left: 2%;
+     padding-right: 2%;
+     display: block;
+     width: auto;
+     height: auto;
+     text-align:center;
+ }
+
+.currentBtn
+{
+    background: #195;
+}
+
+.currentBtn:hover{
+    color: white;
+}
+
+.cmnBtn, .currentBtn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.cmnBtn:hover{
+    background: #aa3;
+}
+
+.show{
+    display: none;
+    pre, h4 {
+        color: coral;
+    }
+}
+
+i{
+  border-radius: 50%;
+  padding: 0.3em 0.3em;
+  vertical-align: middle;
+  background: coral;
+  position: relative;
+  top: -0.8em;
+  align: center;
+  display: block;
+  zoom: 70%;
+}
+
+i.normal{
+      top: 0em;
+}
+
+i:hover{
+    background: #aa3;
+    cursor: pointer;
+   box-shadow: 0px 0px 3px 1px;
+}
+
+#simres{
+    align: right;
+}
+
+.header{
+    height: auto;
+    top: 0px;
+    width: 100%;
+    border-style: solid;
+    border-color: coral;
+    border-width: 0px 0px 1px 0px;
+    color: #f1f1f1;
+    position: relative;
+    display: block;
+    padding-bottom: 1%;
+}
+
+#help, #param, #info
+{
+    margin: 10%;
+}
+
+body{
+    background: #cc2b5e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+select{
+  width: 15%;
+  background: #444;
+  color: coral;
+  border: 1px solid coral;
+  outline:0px ;
+  padding: 2px; 
+  border-radius: 4px;
+}
+
+.settings{
+        color: coral;
+}
+
+.saveBtn{
+    margin: 10%;
+}
