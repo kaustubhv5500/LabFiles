@@ -8,7 +8,7 @@ struct node
 	struct node *next;
 };
 
-int size = 0;
+int size = 0; // global variable to store the size of the linked list
 
 // Function to add a node in the front of a Linked list
 struct node* insert_front(struct node *head, int new_data){
@@ -51,6 +51,7 @@ struct node* insert_after(struct node* head, int position, int new_data)
 	temp->next = current->next;
 	current->next = temp;
 
+	size++;
     return head;
 }
 
@@ -71,16 +72,20 @@ struct node* insert_end(struct node* head, int new_data){
     while (last->next != NULL) 
         last = last->next; 
    
-    last->next = new_node; 
+    last->next = new_node;
+
+    size++; 
     return head;   
 }
 
 // Function to display the status of the linked list
 void display_ll(struct node* head){
+	int count = 0;
 	printf("Status of Linked List : \n");
 	while(head != NULL){
 		printf("%d ",head->data);
 		head = head->next;
+		count++;
 	}
 	printf("\n");
 }
