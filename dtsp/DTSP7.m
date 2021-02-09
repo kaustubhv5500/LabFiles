@@ -15,6 +15,13 @@ hd = zeros(1,Tau+1);
 WH = zeros(1,Tau+1);
 
 % Calculating hd(n)
+% Using numerical integration in MATLAB
+for j=1:length(n)
+    fun = @(x) ((cos(Tau*x)-sin(Tau*x)*i).*(cos(x*n(j))+sin(x*n(j))*i));
+    hd(j) = integral(fun,-pi,-pi/2) + integral(fun,pi/2,pi);
+end
+
+% Using function derived from integration
 for i=1:length(n)
     if n(i)-Tau==0
         hd(i) = 0.5;
