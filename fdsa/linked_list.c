@@ -59,7 +59,7 @@ struct node* insert_after(struct node* head, int position, int new_data)
 struct node* insert_end(struct node* head, int new_data){
     struct node* new_node = (struct node*) malloc(sizeof(struct node)); 
   
-    struct node *last =head; 
+    struct node *last = head; 
     new_node->data  = new_data; 
   
     new_node->next = NULL; 
@@ -78,8 +78,37 @@ struct node* insert_end(struct node* head, int new_data){
     return head;   
 }
 
+struct node* delete_node(struct node* head, int key){
+
+	struct node *temp = head;
+	struct node *prev;
+
+	if(temp->data == key){
+		head = head->next; 
+        free(temp);
+        return head;
+	}
+
+	while (temp != NULL && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL)
+    {
+    	printf("Element Not found\n");
+    	return head;
+    }
+ 
+    prev->next = temp->next;
+    free(temp);
+
+    size--;
+    return head;
+}
+
 // Function to display the status of the linked list
-void display_ll(struct node* head){
+int display_ll(struct node* head){
 	int count = 0;
 	printf("Status of Linked List : \n");
 	while(head != NULL){
@@ -88,6 +117,7 @@ void display_ll(struct node* head){
 		count++;
 	}
 	printf("\n");
+	return count;
 }
 
 int main(){
@@ -95,7 +125,7 @@ int main(){
 	int opcode, data, position;
 
 	do{
-		printf("Enter the Opcode : \n1.Insert in front\n2.Insert after given position\n3.Insert at end\n4.Display Linked List\n0.Exit\n");
+		printf("Enter the Opcode : \n1.Insert in front\n2.Insert after given position\n3.Insert at end\n4.Display Linked List\n5.Delete Node\n0.Exit\n");
 		scanf("%d",&opcode);
 		switch(opcode){
 			case 1: 
@@ -103,6 +133,7 @@ int main(){
 			scanf("%d",&data);
 
 			head = insert_front(head,data);
+			display_ll(head);
 			break;
 
 			case 2:
@@ -112,6 +143,7 @@ int main(){
 			scanf("%d",&position);
 
 			head = insert_after(head,position,data);
+			display_ll(head);
 			break;
 
 			case 3:
@@ -119,9 +151,17 @@ int main(){
 			scanf("%d",&data);
 
 			head = insert_end(head,data);
+			display_ll(head);
 			break;
 
 			case 4 : 
+			display_ll(head);
+			break;
+
+			case 5:
+			printf("Enter the data to be deleted\n");
+			scanf("%d",&data);
+			head = delete_node(head, data);
 			display_ll(head);
 			break;
 
