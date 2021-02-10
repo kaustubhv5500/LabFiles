@@ -29,10 +29,20 @@ set(ax,'xlim',[0 N+1],'fontsize',15);
 grid on;
 figure();
 
+% polarscatter(angle(x),abs(x),75,'filled','r');
+% title('Polar plot of x','FontSize',15);
+% set(gca,'FontSize',15);
+% figure();
+
 % Calculating the DFT of the input signal
 X = DFT(x,N);
 disp('DFT of input signal : ');
 disp(X);
+
+% polarscatter(angle(X),abs(X),75,'filled','r');
+% title('Polar plot of X','FontSize',15);
+% set(gca,'FontSize',15);
+% figure();
 
 % Plotting the DFT of input signal
 stem(abs(X),'r','LineWidth',3);
