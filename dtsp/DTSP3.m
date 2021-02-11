@@ -68,6 +68,25 @@ x_ = IDFT(X,N);
 disp('Retrieved signal after IDFT : ');
 disp(x_);
 
+% Plotting the IDFT of input signal
+stem(abs(x_),'r','LineWidth',3);
+ax = gca();
+title('Plot of magnitude of IDFT of X(k)','FontSize',15);
+xlabel('n','FontSize',15);
+ylabel('|x|','FontSize',15);
+set(ax,'xlim',[0 length(X)+1],'fontsize',15);
+grid on;
+figure();
+
+stem(angle(X),'b','LineWidth',3);
+ax = gca();
+title('Plot of phase of IDFT of X(k)','FontSize',15);
+xlabel('n','FontSize',15);
+ylabel('\angle x','FontSize',15);
+set(ax,'xlim',[0 length(X)+1],'fontsize',15);
+grid on;
+figure();
+
 % Adding zeros at alternate indices and calculating DFT
 x_alt = reshape([x; zeros(size(x))],[],1);
 X = DFT(x_alt,length(x_alt));
