@@ -78,6 +78,7 @@ struct node* insert_end(struct node* head, int new_data){
     return head;   
 }
 
+// Function to delete a node based on the data
 struct node* delete_node(struct node* head, int key){
 
 	struct node *temp = head;

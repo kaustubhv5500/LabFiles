@@ -1,5 +1,5 @@
 % Discrete Time Signal Processing Lab 3
-% Discrete Fourier  Transform
+% Discrete Fourier Transform
 % MATLAB version R2018a
 % Date : 09-02-2021
 
