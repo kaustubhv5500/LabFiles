@@ -90,15 +90,3 @@ title('Magnitude response','FontSize',15);
 xlabel('Frequency (rad/s)','FontSize',15);
 ylabel('Magnitude','FontSize',15);
 grid on;
-
-
-    
-
-
-
-
-
-
-
-    
-
