@@ -35,6 +35,8 @@ end
 den = round(den);
 sys = tf(num,den);
 pzmap(sys);
+ax = gca();
+set(ax,'FontSize',13);
 figure();
 
 numerator = ((ohm_c*T)^N).*[1 6 15 20 15 6 1];
@@ -42,6 +44,8 @@ denominator = [2^N -6*2^N 15*2^N -20*2^N 15*2^N -6*2^N 2^N+ohm_c^N*T^N];
 
 H_z = tf(numerator,denominator,T);
 pzmap(H_z);
+ax = gca();
+set(ax,'FontSize',13);
 figure();
 
 [h,w] = freqz(flip(numerator),flip(denominator),'whole',2001);
@@ -55,22 +59,22 @@ ylabel('Magnitude (dB)');
 grid on;
 figure();
 
-h = h./abs(h);
-
+% h = h./abs(h);
 % freqz(numerator,denominator);
 % figure();
 
-plot(w,h,'r','LineWidth',3);
+plot(w,abs(h),'r','LineWidth',3);
 ax = gca();
 set(ax,'xlim',[0 pi],'FontSize',12);
 title('Magnitude response');
 xlabel('Frequency (rad/s)');
 ylabel('Magnitude');
-set(ax,'YTickLabel',{'0','0.25','0.5','0.75','1'});
 grid on;
 figure();
 
 phasez(flip(numerator),flip(denominator));
+ax = gca();
+set(ax,'FontSize',13);
 figure();
 
 w = 0:0.01:pi;
@@ -82,10 +86,9 @@ for k=1:length(w)
     H(k) = evalfr(H_z,z(k));
 end
 
-H = H./max(H);
 plot(w,abs(H),'r','LineWidth',2);
 ax = gca();
-set(ax,'xlim',[0 pi],'ytick',0:0.2:1);
+set(ax,'xlim',[0 pi],'FontSize',15);
 title('Magnitude response','FontSize',15);
 xlabel('Frequency (rad/s)','FontSize',15);
 ylabel('Magnitude','FontSize',15);
