@@ -47,7 +47,7 @@ sukanya\_kulkarni@spit.ac.in}
 \maketitle
 
 \begin{abstract}
- Software-Defined Radios (SDRs) are powerful and versatile tools that can implement various communication systems. The user can redefine the system by modifying the software. GNU Radio is an open-source SDR that uses a block-based graphical interface with a Python backend framework. Machine Learning (ML) technologies are powerful tools that can bolster the development of the next generation of wireless communication systems. Orthogonal frequency-division multiplexing (OFDM) is a modulation scheme used in modern communication systems such as 4G/5G, WiMax, etc. This study uses the powerful ML ecosystem in Python to model conventional OFDM receivers using the GNU Radio ecosystem. The work trains and compares Deep Neural Networks as well as Linear Regression algorithms (using PHY-layer data) to model the receiver. The trained models improve upon the Bit Error Rate (BER) of conventional systems by a factor of 10$^{-2}$.
+ Software-Defined Radios (SDRs) are powerful and versatile tools that can implement various communication systems in the software domain. The user can redefine the system by modifying the code. GNU Radio is an open-source SDR that uses a block-based graphical interface with a Python backend framework. Machine Learning (ML) technologies are powerful tools that can bolster the development of the next generation of wireless communication systems. Orthogonal frequency-division multiplexing (OFDM) is a modulation scheme used in modern communication systems such as 4G/5G, WiMax, etc. This study uses the powerful ML ecosystem in Python to model conventional OFDM receivers using the GNU Radio ecosystem. The work trains and compares Deep Neural Networks as well as Linear Regression algorithms (using PHY-layer data) to model the receiver. The trained models improve upon the Bit Error Rate (BER) of conventional systems by a factor of 10$^{-2}$.
 \end{abstract}
 
 
@@ -62,7 +62,7 @@ Wireless digital communication has burgeoned since the beginning of the 21st cen
 
 Traditionally, data is sent through a single channel serially and hence any interference to that particular frequency can disrupt the entire transmission. OFDM is a form of multi-carrier modulation. It utilizes multiple closely spaced sub-carriers that are orthogonal to each other to carry data in parallel. Analysis of an OFDM receiver can help understand the working of the system. The receiver functions as a series of demodulators and converts each carrier into DC. Data is regenerated from the carrier by integrating the resulting signal over the symbol period \cite{b3}.
 
-The study plans to implement an OFDM system using a Software Defined Radio (SDR). An SDR implements conventional hardware-based communication systems using software, allowing the user to modify the system easily. It also allows the system to integrate efficiently with peripheral software tools. GNU Radio is an open-source SDR toolkit that uses a block-based interface to implement signal processing systems. It is also available as a Python library.
+This study plans to implement an OFDM system using a Software Defined Radio (SDR). An SDR implements conventional hardware-based communication systems using software, allowing the user to modify the system easily. It also allows the system to integrate efficiently with peripheral software tools. GNU Radio is an open-source SDR toolkit that uses a block-based interface to implement signal processing systems. It is also available as a Python library.
 
 The study uses Machine Learning (ML) and Deep Neural Networks (DNN) to refine the results obtained from  GNU Radio. The utilization of computational power of processors aids in achieving higher accuracy and solutions closer to ideal values. 
 
@@ -83,7 +83,7 @@ Linear regression algorithms model a system using the data by calculating the co
 
 DNNs are supervised, non-linear models that use many layers of artificial neural networks, weights, biases, and activation functions. The algorithm updates the weights and biases based on the error at every level of training which is known as back-propagation. Back-propagation helps improve the performance of the model. Keras and TensorFlow are Python libraries which implement various DNN algorithms.
 
-Fig. 1 shows the construction of the DNN model (using regression) developed for modelling the receiver. The DNN model uses ReLU as the activation function for its layers. The output layer of the DNN model utilizes a linear activation function to achieve regression results. The study implements the ML algorithms to develop detectors which use BPSK and QPSK modulation schemes. 
+Fig. 1 shows the construction of the DNN model (based on regression) developed for modelling the receiver. The DNN model uses ReLU as the activation function for its layers. The output layer of the DNN model utilizes a linear activation function to achieve regression results. The study implements the ML algorithms to develop detectors which use BPSK and QPSK modulation schemes. 
 
 The program uses multi-threading (a feature of Python) to receive and transmit data while training the models and predicting outcomes. Since Python uses C to implement its code, embedded systems and other mobile wireless communication systems can effectively use these models to improve performance.
 
@@ -103,7 +103,7 @@ The study uses GNU Radio 3.8.1 on a Windows PC to implement the OFDM transmitter
 
 
 \subsection{Flowgraph and Data Extraction}
- The flow-graph derives its features from the IEEE 802.11a standards \cite{b5} which is available as an example program in the GNU Radio package. The work modifies the flow-graph by adding signal probes at appropriate locations to extract the required data. Fig. 2 shows the flow-graph of the OFDM receiver used. The study modifies the generated Python file to add the algorithm designed to implement the detector. The flow-graph uses pseudo-random 8-bit bytes as the input data to be modulated. The algorithm deploys Python's sleep function to synchronize data extraction at the transmitting and receiving ends.
+ The flow-graph derives its features from the IEEE 802.11a standards \cite{b5} which is available as an example program in the GNU Radio package. The work modifies the flow-graph by adding signal probes at appropriate locations to extract the required data. Fig. 2 shows the flow-graph of the OFDM receiver used. The study modifies the generated Python file to add the algorithm designed to implement the detector. Fig. 3 and 4 show the time and frequency domain representation of the generated OFDM signal respectively. The flow-graph uses pseudo-random 8-bit bytes as the input data to be modulated. The algorithm deploys Python's sleep function to synchronize data extraction at the transmitting and receiving ends.
  
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=9cm]{tx_ofdm.png}}
@@ -211,13 +211,13 @@ As the SNR increases, the quality of the received signals improves. The newly ex
 \section{Conclusion}
 The integration of ML in communication systems will help improve the reliability and accessibility of information systems in the modern world. Almost all communication devices today have computing capabilities. These devices can implement software-defined transceivers and can also use ML models for error minimization. 
 
-Python has an extensive ML framework and can generate powerful and effective ML models. Python is implemented in C, allowing embedded systems and mobile communication systems to efficiently use the generated models.
+Python has an extensive ML framework and can generate powerful and effective ML models. Python is implemented in C, allowing embedded systems and mobile communication systems to efficiently use the generated models after translation.
 
-This study proposes an algorithm to implement an ML-based detector for OFDM communication systems using Python. The work focuses on Deep Neural Networks and Linear Regression models and compares their relative performance. The work evaluates model performance using metrics such as MSE, MAE, and R$^{2}$ score. 
+This study proposes an algorithm to implement an ML-based detector for OFDM communication systems using Python using the GNU Radio SDR toolkit. The work focuses on Deep Neural Networks and Linear Regression models and compares their relative performance. The work evaluates model performance using metrics such as MSE, MAE, and R$^{2}$ score. 
 
-The work improves upon the BER of the conventional OFDM receiver (based on IEEE 802.11a standards) by a factor of 10$^{-2}$. The DNN models achieve an MSE of 0.02. The linear models achieve R$^{2}$ scores greater than 88 \%. The DNN models perform better than the linear models in all cases.
+The work improves upon the BER of the conventional OFDM receiver (based on IEEE 802.11a standards) by a factor of 10$^{-3}$ for QPSK modulation. The DNN models achieve an MSE of 0.02. The linear models achieve R$^{2}$ scores greater than 88 \%. The DNN models perform better than the linear models in all cases.
 
-Future studies can incorporate data from real-time simulations. The system can be interfaced with a Universal Software Radio Peripheral (USRP) to enable real-time data extraction through real channels. Studies can also extend the proposed algorithm to other forms of modulation schemes.
+Future studies can incorporate data from real-world simulations. The system can be interfaced with a Universal Software Radio Peripheral (USRP) to enable real-time data extraction through real channels. Studies can also extend the proposed algorithm to other forms of modulation schemes.
 
 
 

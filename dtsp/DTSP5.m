@@ -30,7 +30,7 @@ for k=0:N-1
     poles(k+1) = ohm_c*(cos((N+2*k+1)*pi/N)+sin((N+2*k+1)*pi/N)*1i);
 end
 
-% Calculating and plotting the anaglog transfer function (s-domain)
+% Calculating and plotting the analog transfer function (s-domain)
 [num, den] = zp2tf(zeroes,poles,ohm_c^N);
 den = round(den);
 sys = tf(num,den);
@@ -78,12 +78,13 @@ set(ax,'FontSize',13);
 figure();
 
 w = 0:0.01:pi;
-z = cos(w) + sin(w)*1i;
+% z = cos(w) + sin(w)*1i;
 H = zeros(1,length(w));
 
 for k=1:length(w)
     z(k) = cos(w(k)) + sin(w(k))*1i;
     H(k) = evalfr(H_z,z(k));
+    % H(k) = ((ohm_c*(z(k)+1)).^N)/((2*(z(k)-1)).^N+(ohm_c*T).^N);
 end
 
 plot(w,abs(H),'r','LineWidth',2);
