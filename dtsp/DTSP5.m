@@ -78,7 +78,7 @@ set(ax,'FontSize',13);
 figure();
 
 w = 0:0.01:pi;
-% z = cos(w) + sin(w)*1i;
+z = zeros(1,length(w));
 H = zeros(1,length(w));
 
 for k=1:length(w)
@@ -86,6 +86,8 @@ for k=1:length(w)
     H(k) = evalfr(H_z,z(k));
     % H(k) = ((ohm_c*(z(k)+1)).^N)/((2*(z(k)-1)).^N+(ohm_c*T).^N);
 end
+
+H = H./max(H);
 
 plot(w,abs(H),'r','LineWidth',2);
 ax = gca();
