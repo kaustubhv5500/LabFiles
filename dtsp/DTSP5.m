@@ -20,7 +20,7 @@ ohm_s = 2*tan(ws/2)/T;
 N = 0.5*log10((10^(0.1*As)-1)/(10^(0.1^Ap)-1))/log10(ohm_s/ohm_p);
 N = ceil(N);
 
-ohm_c = ohm_p/(10^(0.1*Ap)-1);
+ohm_c = ohm_p/((10^(0.1*Ap)-1)^(1/(2*N)));
 
 % Calculating location of poles
 poles = zeros(1,N);
@@ -32,15 +32,24 @@ end
 
 % Calculating and plotting the analog transfer function (s-domain)
 [num, den] = zp2tf(zeroes,poles,ohm_c^N);
-den = round(den);
+% den = round(den);
 sys = tf(num,den);
 pzmap(sys);
 ax = gca();
 set(ax,'FontSize',13);
 figure();
 
-numerator = ((ohm_c*T)^N).*[1 6 15 20 15 6 1];
-denominator = [2^N -6*2^N 15*2^N -20*2^N 15*2^N -6*2^N 2^N+ohm_c^N*T^N];
+% numerator = ((ohm_c*T)^N).*[1 6 15 20 15 6 1];
+% denominator = [2^N -6*2^N 15*2^N -20*2^N 15*2^N -6*2^N 2^N+ohm_c^N*T^N];
+
+numerator = zeros(1,N+1);
+denominator = zeros(1,N+1);
+denominator(N+1) = (ohm_c*T)^N; 
+
+for p=0:N
+    numerator(p+1) = nchoosek(N,p)*((ohm_c*T)^N);
+    denominator(p+1) = denominator(p+1) + ((-1)^p)*nchoosek(N,p)*((2)^N);
+end
 
 H_z = tf(numerator,denominator,T);
 pzmap(H_z);
@@ -87,12 +96,12 @@ for k=1:length(w)
     % H(k) = ((ohm_c*(z(k)+1)).^N)/((2*(z(k)-1)).^N+(ohm_c*T).^N);
 end
 
-H = H./max(H);
+H = H./abs(H(1));
 
 plot(w,abs(H),'r','LineWidth',2);
 ax = gca();
 set(ax,'xlim',[0 pi],'FontSize',15);
-title('Magnitude response','FontSize',15);
+title('Magnitude response (Normalized)','FontSize',15);
 xlabel('Frequency (rad/s)','FontSize',15);
 ylabel('Magnitude','FontSize',15);
 grid on;
