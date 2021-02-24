@@ -23,7 +23,7 @@ start
 		; Loading r0-r9 with immediate data
 		MOV   r0, #0x3244
 		MOV   r1, #0x3445		
-        MOV   r2, #0xA234              
+       MOV   r2, #0xA234              
 		MOV	  r3, #0xABCD
 		MOV	  r4, #0xFFAD
 		MOV	  r5, #0x12AF
@@ -40,3 +40,4 @@ start
 STOP
 
 	 	END
+

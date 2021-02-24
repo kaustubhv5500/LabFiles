@@ -10,15 +10,15 @@ import numpy as np
 # Dividing dataset into tampered and original
 
 """
-I. Amerini, L. Ballan, R. Caldelli, A. Del Bimbo, G. Serra. 
-“A SIFT-based forensic method for copy-move attack detection and transformation recovery”, 
-IEEE Transactions on Information Forensics and Security, vol. 6, issue 3, pp. 1099-1110, 2011.
+V. Christlein, C. Riess, J. Jordan, C. Riess, E. Angelopoulou: 
+"An Evaluation of Popular Copy-Move Forgery Detection Approaches", 
+IEEE Transactions on Information Forensics and Security, vol. 7, no. 6, pp. 1841-1854, 2012.
 """
 
 image_paths=[] #List to store path of all images
 file_paths = []
 
-for dirname, _, filenames in os.walk('MICC-F2000'):
+for dirname, _, filenames in os.walk('benchmark_data/original'):
     for filename in filenames:
         if '.txt' in filename:
             continue
@@ -27,12 +27,6 @@ for dirname, _, filenames in os.walk('MICC-F2000'):
 original_images=[]
 tampered_images=[]
 
-
-for path in image_paths:
-    if 'tamp' in path:              # As Observed from the above list tampered images name has tamp
-        tampered_images.append(path)
-    else:
-        original_images.append(path)
         
 def plot_image(img,size=(8,8)):
     plt.figure(figsize = size)
@@ -45,21 +39,6 @@ def siftDetector(img):
     key_points, descriptors = sift.detectAndCompute(gray, None)
     return key_points,descriptors
 
-def get_original(tampered):
-    name=re.findall(r'.*/(.*)tamp.*',tampered)
-    original_index=-1
-    if len(name)<1:
-        return -1
-    for index,names in enumerate(original_images):
-        if name[0] in names:
-            original_index=index
-            break
-            
-    if original_index==-1:
-        return original_index,-1
-    else:
-        image=cv2.imread(original_images[original_index])
-        return image,original_index
 
 def show_sift_features(color_img, kp,size=(8,8)):
     gray_img=cv2.cvtColor(color_img,cv2.COLOR_BGR2GRAY)
@@ -122,13 +101,15 @@ def image_fft(img, destination):
         
 tampered_images.sort()
 original_images.sort()
+count = 0
 
-for i in range(len(tampered_images)):
-    tamp = cv2.imread(tampered_images[i],0)
-    dest = r'C:\Users\Kaustubh\OneDrive\Desktop\tampered\tamp' + str(i) + '.jpg'
+
+for i in range(len(image_paths)):
+    tamp = cv2.imread(image_paths[i],0)
+    dest = r'C:\Users\Kaustubh\OneDrive\Desktop\original\original' + str(i) + '.jpg'
     image_fft(tamp, dest)
     
     print(dest)
 
 
-print(len(original_images),len(tampered_images))
+print(len(image_paths))

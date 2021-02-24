@@ -1,5 +1,5 @@
 % Discrete Time Signal Processing Lab 5
-% Design of Butterworth IIR Filter design
+% Design of Butterworth IIR Filter
 % MATLAB version R2018a
 % Date : 16-02-2021
 
@@ -39,8 +39,6 @@ ax = gca();
 set(ax,'FontSize',13);
 figure();
 
-% numerator = ((ohm_c*T)^N).*[1 6 15 20 15 6 1];
-% denominator = [2^N -6*2^N 15*2^N -20*2^N 15*2^N -6*2^N 2^N+ohm_c^N*T^N];
 
 numerator = zeros(1,N+1);
 denominator = zeros(1,N+1);
@@ -48,7 +46,7 @@ denominator(N+1) = (ohm_c*T)^N;
 
 for p=0:N
     numerator(p+1) = nchoosek(N,p)*((ohm_c*T)^N);
-    denominator(p+1) = denominator(p+1) + ((-1)^p)*nchoosek(N,p)*((2)^N);
+    denominator(p+1) = denominator(p+1)+((-1)^p)*nchoosek(N,p)*((2)^N);
 end
 
 H_z = tf(numerator,denominator,T);
@@ -72,7 +70,7 @@ figure();
 % freqz(numerator,denominator);
 % figure();
 
-plot(w,abs(h),'r','LineWidth',3);
+plot(w.*pi,abs(h),'r','LineWidth',3);
 ax = gca();
 set(ax,'xlim',[0 pi],'FontSize',12);
 title('Magnitude response');
@@ -98,7 +96,7 @@ end
 
 H = H./abs(H(1));
 
-plot(w,abs(H),'r','LineWidth',2);
+plot(w.*pi,abs(H),'r','LineWidth',2);
 ax = gca();
 set(ax,'xlim',[0 pi],'FontSize',15);
 title('Magnitude response (Normalized)','FontSize',15);
