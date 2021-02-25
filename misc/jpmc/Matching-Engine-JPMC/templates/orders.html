@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+{% block title %}
+  All Orders
+{% endblock title %}
+{% block content %}
+    <div class="container mt-4">
+        {% if time_valid[0] == False %}
+        <div class="alert alert-warning" role="alert">
+            <marquee>You can place the order but it will be processed after 9:15 (From Monday to Friday)</marquee>
+          </div>
+        {% else %}
+        <div class="alert alert-info" role="alert">
+            <marquee>Market is Open from Monday to Friday between 9:15 to 3:30</marquee>
+          </div>
+        {% endif %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">  
+            <h1 class="h2">Buy Orders</h1>
+        </div>
+        <table id="example_buy_table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>QTY</th>
+                    <th>Pending QTY</th>
+                    <th>Stock Code</th>
+                    <th>Flavour</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for buy_order in buy_data %}
+                  <tr>
+                      <td>{{buy_order['order_id']}}</td>
+                      <td>{{buy_order['customer_id']}}</td>
+                      <td>{{buy_order['quantity']}}</td>
+                      <td>{{buy_order['pending_quantity']}}</td>
+                      <td>{{buy_order['stock_code']}}</td>
+                      <td>{{buy_order['flavour']}}</td>
+                      <td>{{buy_order['status']}}</td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer ID</th>
+                        <th>QTY</th>
+                        <th>Pending QTY</th>
+                        <th>Stock Code</th>
+                        <th>Flavour</th>
+                        <th>Status</th>
+                    </tr>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">  
+            <h1 class="h2">Sell Orders</h1>
+        </div>
+        <table id="example_sell_table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>QTY</th>
+                    <th>Pending QTY</th>
+                    <th>Stock Code</th>
+                    <th>Flavour</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sell_order in sell_data %}
+                  <tr>
+                      <td>{{sell_order.order_id}}</td>
+                      <td>{{sell_order.customer_id}}</td>
+                      <td>{{sell_order.quantity}}</td>
+                      <td>{{sell_order.pending_quantity}}</td>
+                      <td>{{sell_order.stock_code}}</td>
+                      <td>{{sell_order.flavour}}</td>
+                      <td>{{sell_order.status}}</td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>QTY</th>
+                    <th>Pending QTY</th>
+                    <th>Stock Code</th>
+                    <th>Flavour</th>
+                    <th>Status</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+  <div class="modal fade" id="order_add_modal" tabindex="-1" role="dialog" aria-labelledby="order_add_modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="order_add_modalLabel">Add New Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <p aria-hidden="true">&times;</p>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" id='order_form' onsubmit="return false">
+                {{form.hidden_tag()}}
+                <div class="form-group">
+                    {{form.customer_id.label}}
+                    {{form.customer_id(class="form-control customer_id")}}
+                    <span class="text-danger customer_id_error" style="font-size: 12px;"></span>
+                    
+                </div>
+                <div class="form-group">
+                    {{form.trade_type.label}}
+                    {{form.trade_type(class="form-control trade_type")}}
+                    
+                    <div >
+                        <span class="text-sm-left text-inf" style="font-size: 12px;">1> Buy orders by default have all/none flavour.</span><br>
+                        <span class="text-sm-left text"-info style="font-size: 12px;">2> Sell orders by default have partial flavour.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{form.order_type.label}}
+                    {{form.order_type(class="form-control order_type")}}
+                    
+                </div>
+                <div class="form-group">
+                    {{form.stock_code.label}}
+                    {{form.stock_code(class="form-control stock_code")}}
+                    <span class="text-danger stock_code_error" style="font-size: 12px;"></span>
+                    
+                <div class="form-group">
+                    {{form.quantity.label}}
+                    {{form.quantity(class="form-control quantity")}}
+                    <span class="text-danger quantity_error" style="font-size: 12px;"></span>
+                    
+                </div>
+                <div >
+                    {{form.submit(class="btn btn-success",id ='submit')}}
+                </div>
+                
+            </form>
+        </div>        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+ </div>
+
+{% endblock content %}
+{% block script %}
+<script src='../static/main.js'></script>
+<!-- <script type="text/javascript">
+    $('#submit').click(function(event) {
+        event.preventDefault();
+        $.post(url, data=$('#form').serialize(), function(data) {
+          if (data.status == 'ok') {
+            $('#order_add_modal').modal('hide');
+            location.reload();
+          }
+          else {
+            $('#order_add_modal.modal-content').html(data);
+          }
+        });
+      });
+  $(document).ready(function() {
+    
+      $('#example_buy_table').DataTable();
+      $('#example_sell_table').DataTable();
+      $('#example_transaction_table').DataTable();
+     
+  } 
+  );
+  </script> -->
+ {% endblock script %}

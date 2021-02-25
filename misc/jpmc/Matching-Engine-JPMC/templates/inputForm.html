@@ -1,0 +1,75 @@
+<div class="modal fade" id="order_add_modal" tabindex="-1" role="dialog" aria-labelledby="order_add_modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="order_add_modalLabel">Add New Order</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST">
+                {{form.hidden_tag()}}
+                <div class="form-group">
+                    {{form.customer_id.label}}
+                    {{form.customer_id(class="form-control")}}
+                    {% if form.customer_id.errors %}
+                        {% for error in form.customer_id.errors %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.trade_type.label}}
+                    {{form.trade_type(class="form-control")}}
+                    {% if form.trade_type.errors %}
+                        {% for error in form.trade_type.errors %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.order_type.label}}
+                    {{form.order_type(class="form-control")}}
+                    {% if form.order_type.errors %}
+                        {% for error in form.order_type.errors %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.stock_code.label}}
+                    {{form.stock_code(class="form-control")}}
+                    {% if form.stock_code.errors %}
+                        {% for error in form.stock_code.errors %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.quantity.label}}
+                    {{form.quantity(class="form-control")}}
+                    {% if form.quantity.errors %}
+                        {% for error in form.quantity.errors %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{form.flavour.label}}
+                    {{form.flavour(class="form-control")}}
+                    {% if form.flavour.errors %}
+                        {% for error in form.flavour.errors %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {{form.submit(class="btn btn-success")}}
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

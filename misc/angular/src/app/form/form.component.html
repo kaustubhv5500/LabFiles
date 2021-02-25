@@ -1,0 +1,58 @@
+
+<!--Forms using Forms-->
+<!--form #login = "ngForm" (ngSubmit) = "onClickSubmit(login.value)">
+
+    <input type = "email" name = "email" placeholder="Enter e-mail" ngModel>
+    <br/>
+    <input type = 'password' name = 'pwd' placeholder="Enter passsword" ngModel>
+    <br/>
+    <input type = "submit" value = "submit">
+</form-->
+<!--Forms using FormGroup-->
+<!--form [formGroup] = "angForm">
+    <input type = "email" name = "email" placeholder = "Enter Email Here" formControlName = "email" #email>
+    <br/>
+    <input type = "password" name = "pwd" placeholder = "Enter Password" formControlName = "password" #password>
+    <br/>
+    <input type = "submit" value = "submit" (click) = "onClickSubmit(email.value,password.value)">
+</!--form-->
+
+
+<!--div class="row">
+    <div class="col-md-6">
+    
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    
+    <div class="form-group">
+    <label for="">Username</label>
+    
+    <input placeholder="Enter username" class="form-control" formControlName="username" tabindex="1" autofocus="autofocus" autocomplete="off">
+    
+    
+    <p class="txt-danger" *ngIf="submitted && myhasError('username', 'required')">Username is required</p>
+    
+    <p class="txt-danger" *ngIf="submitted && myhasError('username', 'pattern')">Special characters are not allowed</p>
+    <p class="txt-danger" *ngIf="submitted && myhasError('username', 'maxlength')">Username lengthth cannot be more than 50</p>
+    </div>
+    
+    <div class="form-group">
+    <label for="">Password</label>
+    <input type="password"  placeholder="Enter Password" class="form-control" formControlName="password" autocomplete="off" >
+    <p class="txt-danger" *ngIf="submitted && myhasError('password', 'required')">Password is required</p>
+    <p class="txt-danger" *ngIf="submitted && myhasError('password', 'minlength')">Password minimum length is 8</p>
+    </div>
+    <button class="btn btn-primary">Verify and Proceed</button>
+    </form>
+    </div>
+    </!--div-->
+
+    <div formArrayName="items"
+    *ngFor="let item of orderForm.get('items').controls; let i = index;">
+    <div [formGroupName]="i">
+      <input formControlName="name" placeholder="Item name">
+      <input formControlName="description" placeholder="Item description">
+      <input formControlName="price" placeholder="Item price">
+      <input type="submit" value = "add" (click) = "addItem()">
+        </div>
+  
+    Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }}

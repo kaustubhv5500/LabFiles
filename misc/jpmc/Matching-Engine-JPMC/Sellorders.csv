@@ -1,0 +1,5 @@
+order_id,quantity,pending_quantity,stock_code,customer_id,order_type,flavour,status
+1,50,0,500325,3,market,partial,completed
+2,100,0,500325,4,market,partial,completed
+3,200,105,500325,6,market,partial,pending
+4,200,200,500325,6,market,partial,pending

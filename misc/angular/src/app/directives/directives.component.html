@@ -1,0 +1,41 @@
+
+<div class = "container">
+    <h1 *ngIf = "isavailable ; else elseblock">Data is available</h1>
+    <!--# is used for creating templates which is used to define else blocks-->
+    <ng-template #elseblock> 
+        <h2> Not Available</h2>
+    </ng-template>
+</div>
+
+<!-- Do not forget * before using structural constructs-->
+
+<div [ngSwitch] = "vehicle">
+    <div *ngSwitchCase = "'bike'">Vehicle is bike</div>
+    <div *ngSwitchCase = "'bus'">Vehicle is bus</div>
+    <div *ngSwitchCase = "'car'">Vehicle is car</div>
+    <div *ngSwitchDefault>Vehicle is not defined</div>
+
+</div>
+<!--For loop in javascript!!-->
+<div *ngFor = "let color of colors; first as f">
+    <h3>{{f}} {{color}}</h3>
+</div>
+
+<table class = "table table-striped" *ngIf = "emp">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+<!--td : Normal  Font, tr : Add Row, th : Header-->
+    <tr *ngFor = "let  i of emp">
+        <td>{{i.id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.age}}</td>
+    </tr>
+</table>
+
+<select id = "months">
+<option *ngFor = "let i of months">{{i}}</option>
+</select>
+

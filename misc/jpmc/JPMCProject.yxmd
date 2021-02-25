@@ -1,0 +1,550 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2019.3">
+  <Nodes>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="66" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\Kaustubh\Documents\JPMC\Project\Teams.xlsx|||`Sheet1$`</File>
+          <FormatSpecificOptions>
+            <FirstRowData>False</FirstRowData>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Teams.xlsx
+Table=`Sheet1$`</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Player" size="255" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\Teams.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="Role" size="255" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\Teams.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="Price" size="255" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\Teams.xlsx|||`Sheet1$`" type="V_String" />
+            <Field name="Team" size="255" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\Teams.xlsx|||`Sheet1$`" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="0">C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv</File>
+          <FormatSpecificOptions>
+            <CodePage>28591</CodePage>
+            <Delimeter>,</Delimeter>
+            <IgnoreErrors>False</IgnoreErrors>
+            <FieldLen>254</FieldLen>
+            <AllowShareWrite>False</AllowShareWrite>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>PlayerPoints.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="POS" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="PLAYER" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="Pts " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="Mat " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="Wkts " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="Dots " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="4s " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="6s " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="Catches " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+            <Field name="Stumpings " size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\PlayerPoints.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings>
+        <Position x="162" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="List Box (11)">"PLAYER"</Value>
+          <Value name="Check Box (84)">True</Value>
+          <Value name="Check Box (117)">True</Value>
+          <Value name="Check Box (15)">True</Value>
+          <Value name="Check Box (109)">True</Value>
+          <Value name="Check Box (122)">False</Value>
+          <Value name="Check Box (53)">False</Value>
+          <Value name="Check Box (58)">False</Value>
+          <Value name="Check Box (70)">False</Value>
+          <Value name="Check Box (77)">False</Value>
+          <Value name="Drop Down (81)">upper</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings Macro="Cleanse.yxmc" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="294" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Player" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="PLAYER" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_Player" selected="True" input="Left_" />
+                <SelectField field="Left_Team" selected="True" input="Left_" />
+                <SelectField field="Right_PLAYER" selected="False" rename="Right_PLAYER" input="Right_" />
+                <SelectField field="Right_Pts " selected="True" input="Right_" type="Float" size="4" />
+                <SelectField field="Right_Mat " selected="True" input="Right_" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="486" y="114" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File FileFormat="25" MaxRecords="">C:\Users\Kaustubh\Documents\JPMC\Project\final.xlsx|||Sheet1</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <SkipFieldNames>False</SkipFieldNames>
+            <OutputOption>RemoveFile</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>final.xlsx
+Table=Sheet1</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+    <Node ToolID="19">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+        <Position x="438" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <SummarizeFields>
+            <SummarizeField field="Team" action="GroupBy" rename="Group By_Team" />
+            <SummarizeField field="Pts " action="Sum" rename="Sum_Pts " />
+          </SummarizeFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings>
+        <Position x="162" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="List Box (11)">"Player","Role","Price","Team"</Value>
+          <Value name="Check Box (84)">True</Value>
+          <Value name="Check Box (117)">True</Value>
+          <Value name="Check Box (15)">True</Value>
+          <Value name="Check Box (109)">True</Value>
+          <Value name="Check Box (122)">False</Value>
+          <Value name="Check Box (53)">False</Value>
+          <Value name="Check Box (58)">False</Value>
+          <Value name="Check Box (70)">False</Value>
+          <Value name="Check Box (77)">False</Value>
+          <Value name="Drop Down (81)">upper</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings Macro="Cleanse.yxmc" />
+    </Node>
+    <Node ToolID="29">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="570" y="126" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="0">C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv</File>
+          <FormatSpecificOptions>
+            <CodePage>28591</CodePage>
+            <Delimeter>,</Delimeter>
+            <IgnoreErrors>False</IgnoreErrors>
+            <FieldLen>254</FieldLen>
+            <AllowShareWrite>False</AllowShareWrite>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <ImportLine>1</ImportLine>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>matches.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="id" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="season" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="city" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="date" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="team1" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="team2" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="toss_winner" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="toss_decision" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="result" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="dl_applied" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="winner" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="win_by_runs" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="win_by_wickets" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="player_of_match" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="venue" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="32">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="690" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Group By_Team" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="team1" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_Group By_Team" selected="False" input="Left_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="35">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DynamicRename.DynamicRename">
+        <Position x="846" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <RenameMode>Add</RenameMode>
+          <Fields orderChanged="False">
+            <Field name="Sum_Pts " />
+            <Field name="id" selected="False" />
+            <Field name="season" selected="False" />
+            <Field name="city" selected="False" />
+            <Field name="date" selected="False" />
+            <Field name="team1" selected="False" />
+            <Field name="team2" selected="False" />
+            <Field name="toss_winner" selected="False" />
+            <Field name="toss_decision" selected="False" />
+            <Field name="result" selected="False" />
+            <Field name="dl_applied" selected="False" />
+            <Field name="winner" selected="False" />
+            <Field name="win_by_runs" selected="False" />
+            <Field name="win_by_wickets" selected="False" />
+            <Field name="player_of_match" selected="False" />
+            <Field name="venue" selected="False" />
+            <Field name="*Unknown" selected="False" />
+          </Fields>
+          <Expression />
+          <AddPrefixSuffix>
+            <Type>Prefix</Type>
+            <Text>Team1</Text>
+          </AddPrefixSuffix>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Team1Sum_Pts " source="Summarize: Sum - Pts " type="Double" />
+            <Field name="id" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="season" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="city" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="date" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="team1" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="team2" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="toss_winner" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="toss_decision" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="result" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="dl_applied" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="winner" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="win_by_runs" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="win_by_wickets" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="player_of_match" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="venue" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDynamicRename" />
+    </Node>
+    <Node ToolID="36">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="822" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Group By_Team" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="team2" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_Group By_Team" selected="False" input="Left_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="37">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DynamicRename.DynamicRename">
+        <Position x="918" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <RenameMode>Add</RenameMode>
+          <Fields orderChanged="False">
+            <Field name="Sum_Pts " />
+            <Field name="Team1Sum_Pts " selected="False" />
+            <Field name="id" selected="False" />
+            <Field name="season" selected="False" />
+            <Field name="city" selected="False" />
+            <Field name="date" selected="False" />
+            <Field name="team1" selected="False" />
+            <Field name="team2" selected="False" />
+            <Field name="toss_winner" selected="False" />
+            <Field name="toss_decision" selected="False" />
+            <Field name="result" selected="False" />
+            <Field name="dl_applied" selected="False" />
+            <Field name="winner" selected="False" />
+            <Field name="win_by_runs" selected="False" />
+            <Field name="win_by_wickets" selected="False" />
+            <Field name="player_of_match" selected="False" />
+            <Field name="venue" selected="False" />
+            <Field name="*Unknown" selected="False" />
+          </Fields>
+          <Expression />
+          <AddPrefixSuffix>
+            <Type>Prefix</Type>
+            <Text>Team2</Text>
+          </AddPrefixSuffix>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Team2Sum_Pts " source="Summarize: Sum - Pts " type="Double" />
+            <Field name="Team1Sum_Pts " source="Summarize: Sum - Pts " type="Double" />
+            <Field name="id" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="season" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="city" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="date" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="team1" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="team2" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="toss_winner" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="toss_decision" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="result" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="dl_applied" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="winner" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="win_by_runs" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="win_by_wickets" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="player_of_match" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+            <Field name="venue" size="254" source="File: C:\Users\Kaustubh\Documents\JPMC\Project\matches.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDynamicRename" />
+    </Node>
+    <Node ToolID="39">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="1134" y="174" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File FileFormat="25" MaxRecords="">C:\Users\Kaustubh\Documents\JPMC\Project\matches_final.xlsx|||Sheet1</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <SkipFieldNames>False</SkipFieldNames>
+            <OutputOption>RemoveFile</OutputOption>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>matches_final.xlsx
+Table=Sheet1</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="23" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="12" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output26" />
+      <Destination ToolID="14" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="23" Connection="Output26" />
+      <Destination ToolID="14" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Join" />
+      <Destination ToolID="19" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Join" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="32" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="29" Connection="Output" />
+      <Destination ToolID="32" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="36" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="35" Connection="Output" />
+      <Destination ToolID="36" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="32" Connection="Join" />
+      <Destination ToolID="35" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="36" Connection="Join" />
+      <Destination ToolID="37" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="37" Connection="Output" />
+      <Destination ToolID="39" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>JPMCProject</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
