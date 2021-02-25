@@ -110,10 +110,4 @@ figure();
 phasez(bz,az);
 ax = gca();
 set(ax,'FontSize',13);
-
-
-
-
-
-
     

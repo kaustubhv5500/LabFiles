@@ -12,7 +12,7 @@ struct node{
 struct node* new_node(int input_data){
 
 	struct node* temp;
-	temp = malloc(sizeof(node));
+	temp = malloc(sizeof(temp));
 	temp->data = input_data;
 	temp->left = NULL;
 	temp->right = NULL;
@@ -62,8 +62,8 @@ struct node* rotate_left(struct node* root){
 	temp_r->left = root;
 	root->right = temp_l;
 
-	root->height = max(height(x->left), height(x->right)) + 1;
-	temp_r->height = max(height(temp_r->left), height(temp_l->height)) + 1;
+	root->height = max(height(root->left), height(root->right)) + 1;
+	temp_r->height = max(height(temp_r->left), height(temp_l->right)) + 1;
 
 	return temp_r;
 }
@@ -104,12 +104,12 @@ struct node* insert_node(struct node* root, int input_data){
         return rotate_right(root);
 	}
 
-	if (balance < -1 && input_data < root->right->key){
+	if (balance < -1 && input_data < root->right->data){
         root->right = rotate_right(root->right);
-        return rotate_left(node);
+        return rotate_left(root);
     }
 
-    return node;
+    return root;
 }
 
 // Function to perform in order traversal of the tree
@@ -120,4 +120,40 @@ void in_order(struct node* root)
         printf("%d  ", root->data);
         in_order(root->right);
     }
+}
+
+int main(){
+	struct node *root = NULL;
+	int opcode, data;
+
+	do{
+		printf("Enter the opcode : \n1.Insert to tree\n2.Traverse the tree\n0.Exit\n");
+		scanf("%d",&opcode);
+
+		switch(opcode){
+			case 1:
+			printf("Enter the data to be inserted\n");
+			scanf("%d",&data);
+			root = insert_node(root,data);
+			break;
+
+			case 2:
+			printf("Status of Tree : ");
+
+			in_order(root);
+
+			printf("\n");
+			break;
+
+			case 0:
+			break;
+
+			default:
+			printf("Enter the correct OpCode\n");
+			break;
+
+		}
+	}while(opcode);
+
+	return 0;	
 }
