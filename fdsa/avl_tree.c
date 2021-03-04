@@ -112,6 +112,84 @@ struct node* insert_node(struct node* root, int input_data){
     return root;
 }
 
+// Return the minimum value node in the tree
+struct node* min_node(struct node* root){
+
+	struct node *curr = root;
+
+	while(curr->left != NULL)
+		curr = curr->left;
+
+	return curr;
+}
+
+// Function to delete a node
+struct node* delete_node(struct node* root, int key){
+
+	if(root == NULL)
+		return root;
+
+	if(key < root->data)
+		root->left = delete_node(root->left, key);
+	else if(key > root->data)
+		root->right = delete_node(root->right, key);
+
+	else {
+
+		// node with only one child or no child 
+        if( (root->left == NULL) || (root->right == NULL) ) 
+        { 
+            struct node *temp = root->left ? root->left : root->right;
+
+            // Case for only one child
+            if (temp == NULL) 
+            { 
+                temp = root; 
+                root = NULL; 
+            }
+
+            else // One child case 
+             *root = *temp; 
+            
+            free(temp); 
+        }  
+
+        else
+        { 
+            struct node* temp = min_node(root->right); 
+            root->data = temp->data; 
+            root->right = delete_node(root->right, temp->data); 
+        } 
+    }
+
+    if (root == NULL) 
+    	return root;
+
+    root->height = 1 + max(height(root->left), height(root->right));
+    int balance = get_factor(root);
+
+    if (balance > 1 && get_factor(root->left) >= 0) 
+    return rotate_right(root); 
+  
+    if (balance > 1 && get_factor(root->left) < 0) 
+    { 
+        root->left =  rotate_left(root->left); 
+        return rotate_right(root); 
+    } 
+  
+    if (balance < -1 && get_factor(root->right) <= 0) 
+        return rotate_left(root); 
+  
+    if (balance < -1 && get_factor(root->right) > 0) 
+    { 
+        root->right = rotate_right(root->right); 
+        return rotate_left(root); 
+    } 
+  
+    return root;   	  
+
+}
+
 // Function to perform in order traversal of the tree
 void in_order(struct node* root)
 {
@@ -127,7 +205,7 @@ int main(){
 	int opcode, data;
 
 	do{
-		printf("Enter the opcode : \n1.Insert to tree\n2.Traverse the tree\n0.Exit\n");
+		printf("Enter the opcode : \n1.Insert to tree\n2.Traverse the tree\n3.Delete a node\n0.Exit\n");
 		scanf("%d",&opcode);
 
 		switch(opcode){
@@ -143,6 +221,12 @@ int main(){
 			in_order(root);
 
 			printf("\n");
+			break;
+
+			case 3:
+			printf("Enter the data to be deleted\n");
+			scanf("%d", &data);
+			root = delete_node(root,data);
 			break;
 
 			case 0:
