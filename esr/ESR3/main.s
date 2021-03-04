@@ -41,11 +41,11 @@ start
 		STMFD   sp!, {r0-r9}   ; pushing onto stack in descending mode
 
 		LDMFD   sp!, {r11-r12} ; loading data from stack into registers
-		ADD     r11, r11, r12  ; performing logical operations on the stack
-		EOR     r11, r11, r12
-		BIC		r11, r11, r12
-		MUL		r11, r11, r12
-		STMFD   sp!, {r11-r12} ; pushing the updated values in the registers into the stack 
+		ADD     r3, r11, r12  ; performing logical operations on the stack
+		EOR     r0, r11, r12
+		BIC		r1, r11, r12
+		MUL		r2, r11, r12
+		STMFD   sp!, {r0-r3} ; pushing the updated values in the registers into the stack 
 		
 		LDMFD	sp!, {r0-r7}   ; popping data from stack into registers in a fully ascending manner
 		
