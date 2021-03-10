@@ -10,13 +10,23 @@ Courses taken include :
 - RF System/ Antenna Design using MATLAB
 - Advanced Data Structures and Algorithms
 - Control Systems Engineering using Scilab
+- Computer Networks and Communication
+- Web Development using Angular Framework
+- Robotic Process Automation and Data Analytics
 
 Languages and Environments used : 
 - MATLAB
 - Python
 - R
 - C
+- C++
 - Java
 - Scilab
 - Assembly
 - GNU Radio Companion (GRC)
+- Cisco Packet Tracer
+- LaTeX
+- Automation Anywhere
+- Alteryx
+- Angular (Typescript, HTML, CSS, Bootstrap)
+- Arduino 
