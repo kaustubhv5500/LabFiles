@@ -25,7 +25,7 @@ x_ = IDIT_FFT(X);
 disp("IDIT FFT of X obtained : ");
 disp(x_);
 
-x_ = IDIT_FFT(X_);
+x_ = IDIF_FFT(X_);
 disp("IDIF FFT of X obtained : ");
 disp(x_);
 
