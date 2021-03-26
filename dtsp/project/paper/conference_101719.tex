@@ -1,0 +1,260 @@
+\documentclass[conference]{IEEEtran}
+% \IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Copy-move Forgery Detection using combination of FFT and Convolutional Neural Networks
+}
+
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+\renewcommand\IEEEkeywordsname{Keywords}
+
+\author{\IEEEauthorblockN{Gokul Nair}
+\IEEEauthorblockA{\textit{Department of Electronics and Telecommunications} \\
+\textit{Sardar Patel Institute of Technology}\\
+Mumbai-58, India \\
+gokul.nair@spit.ac.in}
+\and
+\IEEEauthorblockN{Kaustubh Venkatesh}
+\IEEEauthorblockA{\textit{Department of Electronics and Telecommunications} \\
+\textit{Sardar Patel Institute of Technology}\\
+Mumbai-58, India \\
+kaustubh.v@spit.ac.in}
+\linebreakand
+\IEEEauthorblockN{Dipankar Sen}
+\IEEEauthorblockA{\textit{Department of Electronics and Telecommunications} \\
+\textit{Sardar Patel Institute of Technology}\\
+Mumbai-58, India \\
+dipankar.sen@spit.ac.in}
+\and
+\IEEEauthorblockN{Reena Kumbhare}
+\IEEEauthorblockA{\textit{Department of Electronics and Telecommunications} \\
+\textit{Sardar Patel Institute of Technology}\\
+Mumbai-58, India \\
+reena\_kumbhare@spit.ac.in}
+}
+
+\maketitle
+
+\begin{abstract}
+Copy-move forgery is an image manipulation technique wherein significant elements are added or removed from the image to spread false information. These forged images have flooded the internet due to the ease of performing such manipulations using accessible image editing software. These manipulations can be detected by analyzing the edges of various elements in the image. Traditional methods for detecting such forgeries include Convolution and Fourier Transforms, which have varying levels of accuracy. These methods fail when there are multiple copy-move attacks in the image. This study proposes an algorithm that uses a combination of Fast Fourier Transform (FFT) and Convolutional Neural Networks (CNN) to improve the accuracy of detecting copy-move forgeries. The proposed algorithm achieves enhanced testing accuracy of 96 \%.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+Copy-move forgery, FFT, Convolutional Neural Networks
+\end{IEEEkeywords}
+
+\section{Introduction}
+Every day, users upload more than 1.8 billion digital images to the internet. With the widespread adoption of smartphones and the internet, this number will surely increase. While the advancement of imaging technology has benefited many spheres of society, image manipulation and forgery continue to remain an issue. Forwarding of modified images shared over social media is growing at unmanageable rates and tends to have real-life implications. Fig. \ref{modi} shows an instance of a copy-move forged image used to spread misinformation. Moreover, the development of powerful image editing tools such as Photoshop has made manipulation of images even more effortless. Thus, detection and classification of such manipulated images is imperative. 
+
+
+Forgers use various image manipulation methods. These include image splicing, Copy-move forgery, and image retouching \cite{b1}. Copy-move forgery is the process by which complete elements are added or removed from the original image. Images manipulated using this method are believable as modern tools allow seamless integration of such components. Detection algorithms use the fact that the edges of manipulated elements in such images are distorted \cite{b2}. These algorithms use various tools such as Fourier Transforms, Cosine Transforms, Convolutional Neural Networks (CNNs), etc. \cite{b1} to detect and classify manipulated images, which have varied levels of success. 
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width=8cm]{modi.jpg}}
+\caption{Real instance of a copy-move attack \cite{b14}}
+\label{modi}
+\end{figure}
+
+There are various datasets created to aid the development of such algorithms. This study plans to use Fast Fourier Transform (FFT) \cite{b10} combined with CNNs to improve the success rate of copy-move forgery detection.
+
+\section{Related Work}
+Many studies have advocated using transformation functions such as Scale-invariant feature transform (SIFT), Fourier, and Cosine transforms \cite{b1} and convolution to perform edge detection on images. \cite{b2} advocates the use of a 2-dimensional Fourier Transform to detect copy-move forgery with an accuracy of 87 \%. \cite{b3} proposes CNN models to detect copy-move forgeries with 90 \% accuracy. \cite{b4} proposes the use of SIFT as a solution and also provides a dataset to help develop copy-move forgery detection techniques. \cite{b5} introduces and compares various other methods to perform detection and also provides a reliable image dataset for development. \cite{b6} highlights various methods to detect attacks such as Support Vector Machines (SVM), Markov Chains, Wavelet Decomposition and also proposes a CNN model. \cite{b8} proposes the use of Singular value decomposition (SVD). While these methods are effective in detecting copy-move forgery to a reasonable extent, they fail to correctly classify images where there are multiple copy-move attacks.
+
+The main contribution of this study is the identification and use of FFT to perform preliminary edge detection which helps the CNN algorithm perform better with larger datasets. This helps improve the success rate of classification.
+
+The organization of the paper is as follows. Section III lays out the algorithm and design of the CNN model used. Section IV delineates the outcome of the study and explains why the model is better than its precursors. Section V concludes the study and summarizes the importance of forgery detection and finding an efficient mechanism.
+
+
+\section{Experimental Design}
+Copy-move forgery detection is based on the fact that the manipulated images have distorted edges around the elements added to or deleted from the image. Thus, edge detection is an important step in classifying such images. The most effective method for performing edge detection is the Fourier Transform. This study uses FFT to perform preliminary edge detection to aid the training of the proposed CNN. The CNN classification algorithm relies on edge detection using convolution. It thus achieves improved accuracy as the images in the dataset already have clearly defined edges. Fig. \ref{flowchart} depicts the flowchart of the proposed method.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[scale=0.17]{block diagram-2.png}}
+\caption{Flowchart of the proposed method}
+\label{flowchart}
+\end{figure}
+
+\subsection{Experimental Setup}
+The study uses the Spyder and Google Colaboratory development environments based on Python for performing FFT and training the CNN models. The Python libraries used include OpenCV, NumPy, Pandas, Matplotlib, Tensorflow, and Keras.  
+
+\subsection{Experimental Dataset}
+The study derives its dataset from multiple sources. These include image datasets created especially to aid the development of copy-move forgery detection techniques. Images from various studies \cite{b4}  \cite{b5} \cite{b7} were randomly selected and combined to form a comprehensive dataset containing 1200 images, with 600 being originals and the rest being their tampered copies. Fig. \ref{tampered} shows one of the sample pairs from the dataset.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width = 9cm]{tamp_up.png}}
+\caption{Sample image manipulated using copy-move forgery}
+\label{tampered}
+\end{figure}
+
+\subsection{Preliminary Edge Detection}
+The study uses the Fast Fourier Transform (FFT) algorithm \cite{b10}, an efficient implementation of the Discrete Fourier Transform, which is used to determine the frequency domain representation of a signal. The proposed algorithm performs FFT on the input images to obtain the magnitude spectrum. It then applies a mask in the form of a High Pass Filter (HPF) to retain only the desired frequencies and perform edge detection. It then performs Inverse Fast Fourier Transform (IFFT) on the signal obtained to retrieve the image with highlighted edges. The dataset of images retrieved after edge detection forms the input training data for the CNN model. Fig. \ref{fft} shows the effect of FFT on the input image as the edges are clearly visible.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width = 9cm]{fft.png}}
+\caption{Resultant after performing edge detection using FFT}
+\label{fft}
+\end{figure}
+
+\subsection{Convolutional Neural Networks}
+CNN is a deep learning algorithm that utilizes the convolution of the image matrix \cite{b11}. Convolution preserves the spatial relationship between pixels. Image classification applications often utilize CNN models. The model used is a sequential model with a two-dimensional convolution layer with input size (None, 224, 224, 3).  The model has a max-pooling layer, which reduces the spatial size of the convoluted features. This reduces the computational time taken to train the model. A flattening layer follows, which converts the polled features into a single column. Dense layers add non-linear characteristics to the model, making it more universal. The model employs Adam optimizer \cite{b9} with a learning rate of 10$^{-3}$. Loss is the quantity that the model seeks to reduce during training. The loss parameter for the model is categorical cross-entropy \cite{b13}. Fig. \ref{model} shows the structure of the designed model.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[scale = 0.33]{model.png}}
+\caption{Structure of the CNN model}
+\label{model}
+\end{figure}
+
+The study trains the model using the edge detected image dataset. The study randomly splits the dataset into two sets (80 percent train and 20 percent validation). The split sets contain a mix of original and tampered images labeled as 0 for original and 1 for tampered images. 
+
+\section{Results}
+This section presents the metrics used to evaluate the model's efficiency of classification. The metrics used for the CNN model are Accuracy, Area Under Curve (AUC) \cite{b12}, Recall, Precision, and Loss. Accuracy is the best metric for assessing the efficiency of binary classification algorithms. The equation for binary accuracy is :
+
+\begin{equation}
+   Accuracy = \frac{TP +TN}{TP +TN + FP +FN}
+\end{equation}
+where,
+\newline
+TP = True Positive , TN = True Negative \newline
+FP = False Positive , FN = False Negative  
+
+\begin{table}[htpb]
+\centering
+\caption{\label{tab:acc}Accuracies of various detection methods}
+\resizebox{240pt}{!}{%
+\begin{tabular}{|c|c|}
+\hline
+Method & Accuracy \\  
+\hline
+Scale-invariant feature transform \cite{b6} & 79.41 \% \\
+\hline
+2-Dimensional Fourier Transform \cite{b2} & 86.57\% \\ 
+\hline
+Singular Value Decomposition (SVD) \cite{b8} & 87.8 \% \\
+\hline
+Convolutional Neural Network \cite{b3} & 90.42 \% \\
+\hline
+FFT + CNN (Proposed Method) & 95.91 \%  \\ 
+\hline
+\end{tabular}
+}
+\end{table}
+
+Table I summarizes the accuracies of various methods of copy-move forgery detection. Conventional methods achieve maximum accuracy of 90.42 \%. The proposed method combines FFT with CNN and achieves an accuracy of 95.91\%, an improvement of 5.5 \%. CNNs use convolution as their first step, wherein the edges of the elements in the image are identified and used to train the neural network. The proposed method achieves improved performance as the input images for the CNN already have clearly defined edges. The transformed images reduce the amount of computation required to detect elements at each epoch of training. This also reduces the possibility of errors while performing convolution on the image. This improves the overall accuracy of the model. Fig. \ref{accuracy} depicts the model accuracy for training and validation datasets over 30 epochs. The accuracy increases as the number of epochs increases.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width=8cm]{accuracy.png}}
+\caption{Accuracy of the trained CNN model}
+\label{accuracy}
+\end{figure}
+
+Table II summarizes the performance parameters of the model. The model achieves high AUC, recall, and precision. Loss for both training and validation datasets is very low. These values verify that the model is not overfitting, and the features of the model apply to images outside the dataset without loss of accuracy. 
+
+\begin{table}[htpb]
+\caption{\label{tab:res}Performance metrics of the developed model}
+\centering
+\resizebox{250pt}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Data & Accuracy & AUC & Recall & Precision & Loss \\  
+\hline
+Training & 99.29 \% & 0.999  &  0.993 & 0.987 & 0.0167 \\
+\hline
+Validation & 95.91 \% & 0.989  & 0.9664  & 0.9395 & 0.252 \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+Fig. \ref{auc} shows the plot of AUC for training and validation dataset for 30 epochs. An AUC closer to 1, indicates good separability. Fig. \ref{precision} and Fig. \ref{recall} show the precision and recall curves of the model respectively. Improving precision usually reduces recall and vice-versa. Loss characterizes how poorly the model performs during prediction. Fig. \ref{loss} depicts the loss curves for the model. Loss values closer to 0 indicate a better model.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width=8cm]{auc.png}}
+\caption{AUC of the trained CNN model}
+\label{auc}
+\end{figure}
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width=8cm]{precision.png}}
+\caption{Precision of the trained CNN model}
+\label{precision}
+\end{figure}
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width=8cm]{recall.png}}
+\caption{Recall of the trained CNN model}
+\label{recall}
+\end{figure}
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[width=8cm]{loss.png}}
+\caption{Loss (MSE) of the trained CNN model}
+\label{loss}
+\end{figure}
+
+The confusion matrix is a visual method to evaluate model performance. It indicates the accuracy of classification based on predicted and actual values by the model. Fig. \ref{confusion} shows the confusion matrix for the model. The model correctly predicts 90 images as original and misclassifies 5 images as tampered. It accurately classifies 102 images as tampered and misclassifies 3 tampered images as original.
+
+\begin{figure}[htpb]
+\centerline{\includegraphics[scale=0.43]{confusion.png}}
+\caption{Confusion matrix of the validation set}
+\label{confusion}
+\end{figure}
+
+\section{Conclusion}
+As image editing technologies become more powerful and accessible, the development of corresponding methods to detect such manipulations is imperative to curb the spread of misinformation. While these manipulations may not be apparent to the human eye, appropriate algorithms can effectively identify such images. This study proposes a method to detect copy-move forgery, an effective and widespread image manipulation technique. 
+
+The study compares various methods developed to solve this problem, all of which assess the distortion in the edges of elements in manipulated images. CNNs perform the best because they use convolution for edge detection, using which the subsequent neural network layers are trained. The study uses FFT to perform preliminary edge detection on the image dataset. The clearly defined edges of these images help the CNN algorithm perform better. The study analyses the developed model using performance metrics like accuracy, AUC, precision, recall, loss, and confusion matrix. The proposed method achieves an improved accuracy of 95.91 \%. The CNN model developed also achieves a high AUC of 0.99 and a low loss value of 0.25.
+
+Future studies can consider other edge detection algorithms in combination with CNNs. Studies can use the concept of Transfer Learning and pre-trained models to improve the success rate. Studies can also extend the proposed method to other forms of image manipulation.
+
+
+\begin{thebibliography}{00}
+\bibitem{b1}Basavarajappa, Shwetha B \& Sathyanarayana, S.. (2016). Digital image forgery detection techniques: a survey. ACCENTS Transactions on Information Security. 2. 22-31. 10.19101/TIS.2017.25003.
+
+\bibitem{b2}Ketenci, Seniha \& Ulutas, Guzin. (2013). Copy-move forgery detection in images via 2D-Fourier Transform. 813-816. 10.1109/TSP.2013.6614051. 
+\bibitem{b14}BBC News. 2015. Chennai floods: Edited Modi photo sparks online mockery. [online] Available at: <https://www.bbc.com/news/world-asia-india-34991822> [Accessed 23 March 2021].
+
+\bibitem{b10}E. O. Brigham and R. E. Morrow, "The fast Fourier transform," in IEEE Spectrum, vol. 4, no. 12, pp. 63-70, Dec. 1967, doi: 10.1109/MSPEC.1967.5217220.
+
+\bibitem{b3}Abdalla, Younis \& Iqbal, Tariq \& Shehata, Mohamed. (2019). Convolutional Neural Network for Copy-Move Forgery Detection. Symmetry. 11. 1280. 10.3390/sym11101280.
+
+\bibitem{b4} I. Amerini, L. Ballan, R. Caldelli, A. Del Bimbo, G. Serra. 
+“A SIFT-based forensic method for copy-move attack detection and transformation recovery”, IEEE Transactions on Information Forensics and Security, vol. 6, issue 3, pp. 1099-1110, 2011.
+
+\bibitem{b5}V. Christlein, C. Riess, J. Jordan, C. Riess, E. Angelopoulou: 
+"An Evaluation of Popular Copy-Move Forgery Detection Approaches", 
+IEEE Transactions on Information Forensics and Security, vol. 7, no. 6, pp. 1841-1854, 2012.
+
+\bibitem{b6}Agarwal, Shruti \& Fan, Wei \& Farid, Hany. (2018). A Diverse Large-Scale Dataset for Evaluating Rebroadcast Attacks. 1997-2001. 10.1109/ICASSP.2018.8462205.
+
+\bibitem{b8}Kashyap, Abhishek \& Agarwal, Megha \& Gupta, Hari. (2017). Detection of Copy-move Image forgery using SVD and Cuckoo Search Algorithm. International Journal of Engineering and Technology(UAE). 7. 10.14419/ijet.v7i2.13.11604. 
+
+\bibitem{b7}D.-T. Dang-Nguyen, C. Pasquini, V. Conotter, G. Boato, RAISE – A Raw Images Dataset for Digital Image Forensics, ACM Multimedia Systems, Portland, Oregon, March 18-20, 2015
+
+\bibitem{b11}S. Albawi, T. A. Mohammed and S. Al-Zawi, "Understanding of a convolutional neural network," 2017 International Conference on Engineering and Technology (ICET), Antalya, Turkey, 2017, pp. 1-6, doi: 10.1109/ICEngTechnol.2017.8308186.
+
+\bibitem{b9}Diederik P. Kingma, Jimmy Ba “Adam: A Method for Stochastic Optimization” arXiv:1412.6980 [cs.LG] 30 Jan 2017
+
+\bibitem{b13}Zhilu Zhang and Mert R. Sabuncu. 2018. Generalized cross entropy loss for training deep neural networks with noisy labels. In Proceedings of the 32nd International Conference on Neural Information Processing Systems (NIPS'18). Curran Associates Inc., Red Hook, NY, USA, 8792–8802.
+
+\bibitem{b12}Jin Huang and C. X. Ling, "Using AUC and accuracy in evaluating learning algorithms," in IEEE Transactions on Knowledge and Data Engineering, vol. 17, no. 3, pp. 299-310, March 2005, doi: 10.1109/TKDE.2005.50.
+
+
+
+\end{thebibliography}
+\end{document}
