@@ -9,5 +9,6 @@ socket.getaddrinfo('localhost', 8080)
 clientSocket.sendto(message,(serverName, serverPort))
 
 modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
-print(modifiedMessage)
+print('Input Message : ',message)
+print('Received Message :',modifiedMessage)
 clientSocket.close()
