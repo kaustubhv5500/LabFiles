@@ -24,7 +24,7 @@ __Vectors
 A			DCW 0xFFFF
 			ALIGN
 				
-B_			DCW 0x3454
+B_			DCW 0xA099
 			ALIGN
 
 C			DCW 0x3030
@@ -33,7 +33,7 @@ C			DCW 0x3030
 D			DCW 0xABCD
 			ALIGN
 				
-E			DCW 0xFFED
+E			DCW 0x0021
 			ALIGN
 				
 F			DCW 0x12FD
@@ -89,6 +89,7 @@ calc_Y
 			MUL R9, R3, R9
 			MOV R10, #0x0051
 			MUL R10, R4, R10
+			ADD R10, R9, R10 
 			MUL R8, R8, R10
 			
 			MOV R10, #0x0023 
