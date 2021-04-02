@@ -37,7 +37,7 @@ gamma_out = s22 + ((s12*s21*gamma_s)/(1-s11*gamma_s));
 % Calculating the gains of the designed antenna
 G = (abs(s21)^2)*(1-abs(gamma_l)^2)/((1-abs(gamma_in)^2)*(abs(1-s22*gamma_l)^2));
 G_A = (abs(s21)^2)*(1-abs(gamma_s)^2)/((1-abs(gamma_out)^2)*(abs(1-s11*gamma_s)^2));
-G_T = (abs(s21)^2)*(1-abs(gamma_s)^2)*(1-abs(gamma_l)^2)/((abs(1-gamma_s*gamma_l)^2)*(abs(1-s22*gamma_l)^2));
+G_T = (abs(s21)^2)*(1-abs(gamma_s)^2)*(1-abs(gamma_l)^2)/((abs(1-gamma_s*gamma_in)^2)*(abs(1-s22*gamma_l)^2));
 G_TU = (abs(s21)^2)*(1-abs(gamma_s)^2)*(1-abs(gamma_l)^2)/((abs(1-s11*gamma_s)^2)*(abs(1-s22*gamma_l)^2));
 
 % Displaying the output parameters
