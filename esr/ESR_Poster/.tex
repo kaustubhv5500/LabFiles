@@ -1,0 +1,123 @@
+\documentclass[25pt,margin=1in,innermargin=-4.5in,blockverticalspace=-0.25in]{tikzposter}
+\geometry{paperwidth=42in,paperheight=30in}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{graphics}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{emory-theme}
+
+\usepackage{mwe} % for placeholder images
+
+\addbibresource{refs.bib}
+
+% set theme parameters
+\tikzposterlatexaffectionproofoff
+\usetheme{EmoryTheme}
+\usecolorstyle{EmoryStyle}
+
+\title{\textbf{QNX Realtime Operating System and Applications}}
+
+\author{Gokul Nair (2018120039)\ , Kaustubh Venkatesh (2018120033)}
+\institute{ Embedded Systems and RTOS \\
+            \ Department of Electronics and Telecommunication, Sardar Patel Institute of Technology}
+\titlegraphic{\includegraphics[width=0.08\textwidth]{spit.png}}
+
+% begin document
+\begin{document}
+\maketitle
+\centering
+\begin{columns}
+    \column{0.33}
+    \block{Abstract}{
+Real-time operating systems (RTOS) are operating systems intended to serve time sensitive applications that process data without buffer delays. QNX is an RTOS that provides a processor distributed real-time environment based on a microkernel architecture that delivers the full device level performance of the underlying hardware. This study presents an architectural overview of QNX and its applications.
+\\
+
+    \begin{center}
+ \includegraphics[width=13cm]{qnxlogo.png}\\
+ \caption{Fig. 1 :  QNX Logo}
+ \centering
+ \label{qnx_logo}
+      \end{center}
+    }
+    \block{Introduction}{
+         QNX is a commercial Unix-like hard real-time operating system used in embedded systems.
+Closed-source OS which was developed in the 1980s and was acquired by Blackberry in 2010.
+Based on a microkernel RTOS based architecture.Also includes a embeddable Graphical User Interface (GUI).
+\\
+   \begin{center}
+ \includegraphics[width=20cm]{QNX_6.4.1_screenshot.png}
+ \\
+ \caption{Fig. 2 :  QNX GUI Window}
+        \end{center}
+\vspace{5mm}
+\vfill
+One of the first widespread uses of the QNX real-time OS (RTOS) was in the non-embedded world when it was selected as the operating system for the Ontario education system's own computer design, the Unisys ICON. Over the years QNX was used mostly for larger projects, as its 44k kernel was too large to fit inside the one-chip computers of the era. 
+    }
+    
+    \column{0.33}
+    \block{Features 
+}{
+\begin{enumerate}
+\item Multi-platform OS which can run on x86-64, ARM32 and ARM64.
+\item The QNX kernel ‘procnto’ contains CPU scheduling, interprocess communication, interrupt redirection and timers.
+\item Kernel runs in the form of a number of small tasks. A special process ‘proc’ performs process creation and memory management.
+\item Supports symmetric multiprocessing, processor affinity, strict priority-preemptive scheduling and adaptive partition scheduling (APS).
+\end{enumerate}
+\vspace{10mm}
+\vfill
+\begin{center}
+ \includegraphics[width=15cm]{e2Ftemp2Ftopic2Fmemory_MEMMGT_.xml_d115503e21.jpg}\\
+  \caption{Fig. 3 : QNX Microkernel}
+\end{center}
+      }
+
+    \block{Memory Management}{
+        By design, QNX's architecture helps ensure that faults, including memory errors, are confined to the program that caused them. Programs are less likely to cause a cascade of faults because processes are isolated from each other and from the microkernel. 
+        
+        Even device drivers behave like regular debuggable processes. This robust architecture ensures that crashing one program has little or no effect on other programs throughout the system. If a program faults, the system can be sure that the error is restricted to that process's operation. 
+\vspace{10mm}
+\vfill
+
+\begin{center}
+ \includegraphics[width=20cm]{e2Ftemp2Ftopic2Fmemory_MEMMGT_.xml_d115503e54.jpg}\\
+ \caption{Fig. 4 : Memory Management in QNX}
+\end{center}
+}
+
+\column{0.33}
+\block{Applications}{
+\begin{enumerate}
+\item Used in automobile infotainment systems. 
+\item Used in Blackberry tablets and smartphones.
+\end{enumerate}
+}
+
+\block{Architecture}{
+\begin{enumerate}
+
+\item Inter-process communication is done using the MsgSend operation, a subroutine-call like operation. Handled based on thread priority.
+\item The boot loader can load an image containing the kernel and any desired set of user programs and shared libraries. There are no device drivers in the kernel.
+\item QNX's full memory protection means that almost all the memory addresses a program encounters are virtual addresses. The process manager maps the program's virtual memory addresses to the actual physical memory.
+\end{enumerate}
+        
+        \begin{center}
+            \includegraphics[width=0.9\linewidth]{qvm_arch.png}\\
+             \caption{Fig. 5 : QNX Architechture}
+        \end{center}
+    }
+    \block{References}{
+    \bibitem{b1}[1] Hildebrand, D.“An Architectural Overview of QNX.” USENIX Workshop on Microkernels and Other Kernel Architectures (1992).
+    \bibitem{b2}[2] QNX Staff (2004-08-17). "QNX Delivers Extremely Reliable Microkernel for Massively Scalable Routing System". Retrieved 2021-03-21.
+    \bibitem{b3}[3] Embedded OS, Support and Services | RTOS, Hypervisor | BlackBerry QNX : https://blackberry.qnx.com/en
+    \bibitem{b4}[4] Q. N. X. Community, “Analyzing Memory Usage and Finding Errors,” QNX Momentics IDE User's Guide, 12-Dec-2012. http://www.qnx.com/developers/docs/6.5.0/index.jsp 
+    }
+\end{columns}
+\end{document}

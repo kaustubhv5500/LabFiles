@@ -62,7 +62,6 @@ Copy-move forgery, FFT, Convolutional Neural Networks
 \section{Introduction}
 Every day, users upload more than 1.8 billion digital images to the internet. With the widespread adoption of smartphones and the internet, this number will surely increase. While the advancement of imaging technology has benefited many spheres of society, image manipulation and forgery continue to remain an issue. Forwarding of modified images shared over social media is growing at unmanageable rates and tends to have real-life implications. Fig. \ref{modi} shows an instance of a copy-move forged image used to spread misinformation. Moreover, the development of powerful image editing tools such as Photoshop has made manipulation of images even more effortless. Thus, detection and classification of such manipulated images is imperative. 
 
-
 Forgers use various image manipulation methods. These include image splicing, Copy-move forgery, and image retouching \cite{b1}. Copy-move forgery is the process by which complete elements are added or removed from the original image. Images manipulated using this method are believable as modern tools allow seamless integration of such components. Detection algorithms use the fact that the edges of manipulated elements in such images are distorted \cite{b2}. These algorithms use various tools such as Fourier Transforms, Cosine Transforms, Convolutional Neural Networks (CNNs), etc. \cite{b1} to detect and classify manipulated images, which have varied levels of success. 
 
 \begin{figure}[htpb]
@@ -76,10 +75,9 @@ There are various datasets created to aid the development of such algorithms. Th
 \section{Related Work}
 Many studies have advocated using transformation functions such as Scale-invariant feature transform (SIFT), Fourier, and Cosine transforms \cite{b1} and convolution to perform edge detection on images. \cite{b2} advocates the use of a 2-dimensional Fourier Transform to detect copy-move forgery with an accuracy of 87 \%. \cite{b3} proposes CNN models to detect copy-move forgeries with 90 \% accuracy. \cite{b4} proposes the use of SIFT as a solution and also provides a dataset to help develop copy-move forgery detection techniques. \cite{b5} introduces and compares various other methods to perform detection and also provides a reliable image dataset for development. \cite{b6} highlights various methods to detect attacks such as Support Vector Machines (SVM), Markov Chains, Wavelet Decomposition and also proposes a CNN model. \cite{b8} proposes the use of Singular value decomposition (SVD). While these methods are effective in detecting copy-move forgery to a reasonable extent, they fail to correctly classify images where there are multiple copy-move attacks.
 
-The main contribution of this study is the identification and use of FFT to perform preliminary edge detection which helps the CNN algorithm perform better with larger datasets. This helps improve the success rate of classification.
+The main contribution of this study is the identification and use of FFT to perform preliminary edge detection which helps the CNN algorithm perform better with larger datasets and multiple copy-move attacks. This helps improve the success rate of classification.
 
 The organization of the paper is as follows. Section III lays out the algorithm and design of the CNN model used. Section IV delineates the outcome of the study and explains why the model is better than its precursors. Section V concludes the study and summarizes the importance of forgery detection and finding an efficient mechanism.
-
 
 \section{Experimental Design}
 Copy-move forgery detection is based on the fact that the manipulated images have distorted edges around the elements added to or deleted from the image. Thus, edge detection is an important step in classifying such images. The most effective method for performing edge detection is the Fourier Transform. This study uses FFT to perform preliminary edge detection to aid the training of the proposed CNN. The CNN classification algorithm relies on edge detection using convolution. It thus achieves improved accuracy as the images in the dataset already have clearly defined edges. Fig. \ref{flowchart} depicts the flowchart of the proposed method.
@@ -103,7 +101,7 @@ The study derives its dataset from multiple sources. These include image dataset
 \end{figure}
 
 \subsection{Preliminary Edge Detection}
-The study uses the Fast Fourier Transform (FFT) algorithm \cite{b10}, an efficient implementation of the Discrete Fourier Transform, which is used to determine the frequency domain representation of a signal. The proposed algorithm performs FFT on the input images to obtain the magnitude spectrum. It then applies a mask in the form of a High Pass Filter (HPF) to retain only the desired frequencies and perform edge detection. It then performs Inverse Fast Fourier Transform (IFFT) on the signal obtained to retrieve the image with highlighted edges. The dataset of images retrieved after edge detection forms the input training data for the CNN model. Fig. \ref{fft} shows the effect of FFT on the input image as the edges are clearly visible.
+The study uses the Fast Fourier Transform (FFT) algorithm \cite{b10}, an efficient implementation of the Discrete Fourier Transform, which is used to determine the frequency domain representation of a signal. The proposed algorithm performs FFT (2-dimensional 64 point) on the input images to obtain the magnitude spectrum. It then applies a mask in the form of a High Pass Filter (HPF) to retain only the desired frequencies and perform edge detection \cite{b15}. It then performs Inverse Fast Fourier Transform (IFFT) on the signal obtained to retrieve the image with highlighted edges. The dataset of images retrieved after edge detection forms the input training data for the CNN model. Fig. \ref{fft} shows the effect of FFT on the input image as the edges are clearly visible.
 
 \begin{figure}[htpb]
 \centerline{\includegraphics[width = 9cm]{fft.png}}
@@ -175,7 +173,7 @@ Data & Accuracy & AUC & Recall & Precision & Loss \\
 \hline
 Training & 99.29 \% & 0.999  &  0.993 & 0.987 & 0.0167 \\
 \hline
-Validation & 95.91 \% & 0.989  & 0.9664  & 0.9395 & 0.252 \\
+Validation & 95.91 \% & 0.989  & 0.9395  &  0.9664 & 0.252 \\
 \hline
 \end{tabular}
 }
@@ -245,6 +243,8 @@ IEEE Transactions on Information Forensics and Security, vol. 7, no. 6, pp. 1841
 \bibitem{b8}Kashyap, Abhishek \& Agarwal, Megha \& Gupta, Hari. (2017). Detection of Copy-move Image forgery using SVD and Cuckoo Search Algorithm. International Journal of Engineering and Technology(UAE). 7. 10.14419/ijet.v7i2.13.11604. 
 
 \bibitem{b7}D.-T. Dang-Nguyen, C. Pasquini, V. Conotter, G. Boato, RAISE – A Raw Images Dataset for Digital Image Forensics, ACM Multimedia Systems, Portland, Oregon, March 18-20, 2015
+
+\bibitem{b15}A. Sinha, “Edge detection in images using Fourier Transform,” Akshay Sinha's Github, 24-Aug-2018. [Online]. Available: https://akshaysin.github.io/fourier\_transform.html\#.YGcLo7DitPZ. [Accessed: 02-Apr-2021]. 
 
 \bibitem{b11}S. Albawi, T. A. Mohammed and S. Al-Zawi, "Understanding of a convolutional neural network," 2017 International Conference on Engineering and Technology (ICET), Antalya, Turkey, 2017, pp. 1-6, doi: 10.1109/ICEngTechnol.2017.8308186.
 
