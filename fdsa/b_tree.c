@@ -22,8 +22,7 @@ void leafNode (int);
 Node *insert (Node *, int);
 Node *splitRoot (Node *);
 Node *split (Node *, int);
-Node *
-createNode (Node * node, int data)
+Node *createNode (Node * node, int data)
 {
 
   node = (Node *) malloc (sizeof (Node));
@@ -375,7 +374,7 @@ int main ()
 {
 
   int choice = 0, element;
-  while (choice != 4)
+  while (choice != 3)
     {
 
       printf ("\n1.Insert \n2.Search \n3.Exit\n");
