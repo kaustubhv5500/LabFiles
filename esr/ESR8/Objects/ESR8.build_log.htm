@@ -1,0 +1,87 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.33.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Kaustubh Venkatesh, SPIT, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.33.0.0
+Toolchain Path:  D:\Apps\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.15
+Assembler:       Armasm.exe V6.15
+Linker/Locator:  ArmLink.exe V6.15
+Library Manager: ArmAr.exe V6.15
+Hex Converter:   FromElf.exe V6.15
+CPU DLL:         SARMCM3.DLL V5.33.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      UL2CM3.DLL V1.163.9.0
+Dialog DLL:      TCM.DLL V1.48.0.0
+ 
+<h2>Project:</h2>
+C:\Users\Kaustubh\OneDrive\Documents\LabFiles\esr\ESR8\ESR8.uvprojx
+Project File Date:  04/11/2021
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.15', folder: 'D:\Apps\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+main.c(1): warning: In file included from...
+D:/Apps/Keil_v5/ARM/RV31/INC\RTL.h(117): warning: '__TARGET_ARCH_6S_M' is not defined, evaluates to 0 [-Wundef]
+#if !(__TARGET_ARCH_6S_M || __TARGET_ARCH_7_M || __TARGET_ARCH_7E_M)
+      ^
+D:/Apps/Keil_v5/ARM/RV31/INC\RTL.h(117): warning: '__TARGET_ARCH_7_M' is not defined, evaluates to 0 [-Wundef]
+#if !(__TARGET_ARCH_6S_M || __TARGET_ARCH_7_M || __TARGET_ARCH_7E_M)
+                            ^
+D:/Apps/Keil_v5/ARM/RV31/INC\RTL.h(117): warning: '__TARGET_ARCH_7E_M' is not defined, evaluates to 0 [-Wundef]
+#if !(__TARGET_ARCH_6S_M || __TARGET_ARCH_7_M || __TARGET_ARCH_7E_M)
+                                                 ^
+D:/Apps/Keil_v5/ARM/RV31/INC\RTL.h(593): warning: anonymous structs are a C11 extension [-Wc11-extensions]
+    struct {
+    ^
+D:/Apps/Keil_v5/ARM/RV31/INC\RTL.h(596): warning: anonymous structs are a C11 extension [-Wc11-extensions]
+    struct {
+    ^
+D:/Apps/Keil_v5/ARM/RV31/INC\RTL.h(592): warning: anonymous unions are a C11 extension [-Wc11-extensions]
+  union {
+  ^
+main.c(2): warning: non-portable path to file '<LPC21xx.h>'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include <lpc21xx.h>
+         ^~~~~~~~~~~
+         <LPC21xx.h>
+main.c(13): warning: function 'job1' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+ {
+ ^
+main.c(37): warning: function 'job2' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+{
+^
+main.c(5): warning: unused variable 'tsk2' [-Wunused-variable]
+static OS_TID tsk1,tsk2;
+                   ^
+10 warnings generated.
+compiling main.c...
+linking...
+.\Objects\ESR8.axf: Error: L6320W: Ignoring --entry command. Cannot find argument 'Reset_Handler'.
+.\Objects\ESR8.axf: Warning: L6320W: Ignoring --first command. Cannot find argument '__Vectors'.
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 1 warning and 1 error messages.
+".\Objects\ESR8.axf" - 1 Error(s), 11 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.3.0.pack
+                Keil.STM32F1xx_DFP.2.3.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  D:\Apps\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>

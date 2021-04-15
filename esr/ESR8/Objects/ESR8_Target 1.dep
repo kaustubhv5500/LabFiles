@@ -1,0 +1,6 @@
+Dependencies for Project 'ESR8', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 6150000::V6.15::ARMCLANG
+F (.\main.c)(0x60730F91)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -O1 -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I D:/Apps/Keil_v5/ARM/RV31/INC -I D:/Apps/Keil_v5/ARM/INC/Philips-ID:/Apps/Arm/Packs/Keil/STM32F1xx_DFP/2.3.0/Device/Include-ID:/Apps/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="533" -DSTM32F10X_MD_VL-o ./objects/main.o -MD)
+I (D:\Apps\Keil_v5\ARM\RV31\INC\rtl.h)(0x60631C60)
+I (D:\Apps\Keil_v5\ARM\INC\Philips\lpc21xx.h)(0x559CFE30)
+I (D:\Apps\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x5F36F3DC)

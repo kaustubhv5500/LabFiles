@@ -6,9 +6,23 @@
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
+\usepackage{comment}
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+
+\tikzset{
+block/.style = {draw, fill=white, rectangle, minimum height=3em, minimum width=3em},
+tmp/.style  = {coordinate}, 
+sum/.style= {draw, fill=white, circle, node distance=1cm},
+input/.style = {coordinate},
+output/.style= {coordinate},
+pinstyle/.style = {pin edge={to-,thin,black}
+}
+}
+
 \begin{document}
 
 \title{Copy-move Forgery Detection using combination of FFT and Convolutional Neural Networks
@@ -83,10 +97,39 @@ The organization of the paper is as follows. Section III lays out the algorithm 
 Copy-move forgery detection is based on the fact that the manipulated images have distorted edges around the elements added to or deleted from the image. Thus, edge detection is an important step in classifying such images. The most effective method for performing edge detection is the Fourier Transform. This study uses FFT to perform preliminary edge detection to aid the training of the proposed CNN. The CNN classification algorithm relies on feature extraction and edge detection using convolution. It thus achieves improved accuracy as the images in the dataset already have clearly defined edges. This allows the study to reduce the number of convolution layers in the CNN model without reducing accuracy while improving efficiency. Fig. \ref{flowchart} depicts the flowchart of the proposed method.
 
 \begin{figure}[htpb]
-\centerline{\includegraphics[scale=0.17]{block diagram-2.png}}
+\centerline{
+\begin{tikzpicture}[thick,scale=0.77, every node/.style={scale=0.77},text width=35ex, align=center,node distance=1.5cm,>=latex']
+    \node [block, name=input] (input) {Image Input};
+    \node [block, below of=input] (smooth) {Image Smoothening};
+    \draw [->] (input) -- (smooth);
+    \node [block, below of=smooth] (fft) {Apply 2-D FFT};
+    \draw [->] (smooth) -- (fft);
+    \node [block, below of=fft] (mask) {Apply Mask (High Pass Filter)};
+    \draw [->] (fft) -- (mask);
+    \node [block, below of=mask, align=center] (ifft) {Perform IFFT (Retrieve image \\ with Edges Detected)};
+    \draw [->] (mask) -- (ifft);
+    \node [block, below of=ifft, align=center] (cnn) {Train CNN Model using Edge Detected Dataset};
+    \draw [->] (ifft) -- (cnn);
+    \node [block, below of=cnn, align=center] (sim) {Search for Similarity of Blocks};
+    \draw [->] (cnn) -- (sim);
+    \node [block, below of=sim, align=center] (dist) {Check for Distortion of Edges};
+    \draw [->] (sim) -- (dist);
+    \node [block, below of=dist, align=center] (pred) {Determine if Image is\\ Tampered using Trained Model};
+    \draw [->] (dist) -- (pred);
+    \node [block, below of=pred, align=center] (end) {End};
+    \draw [->] (pred) -- (end);
+\end{tikzpicture}}
 \caption{Flowchart of the proposed method}
 \label{flowchart}
 \end{figure}
+
+\begin{comment}
+\begin{figure}[htpb]
+\centerline{\includegraphics[scale=0.5]{block diagram-2.png}}
+\caption{Flowchart of the proposed method \cite{b14}}
+\label{flowchart}
+\end{figure}
+\end{comment}
 
 \subsection{Experimental Setup}
 The study uses the Spyder and Google Colaboratory development environments based on Python for performing FFT and training the CNN models. The Python libraries used include OpenCV, NumPy, Pandas, Matplotlib, Tensorflow, and Keras.  
@@ -113,7 +156,7 @@ The study uses the Fast Fourier Transform (FFT) algorithm \cite{b10}, an efficie
 CNN is a deep learning algorithm that utilizes the convolution of the image matrix using an edge detection kernel \cite{b11}. Convolution preserves the spatial relationship between pixels. Image classification applications often utilize CNN models. The model used is a sequential model with a two-dimensional convolution layer with input size (None, 224, 224, 3).  The model has a max-pooling layer, which reduces the spatial size of the convoluted features. This reduces the computational time taken to train the model. A flattening layer follows, which converts the polled features into a single column. Dense layers add non-linear characteristics to the model, making it more universal. The model employs Adam optimizer \cite{b9} with a learning rate of 10$^{-3}$. Loss is the quantity that the model seeks to reduce during training. The loss parameter for the model is categorical cross-entropy \cite{b13}. Fig. \ref{model} shows the structure of the designed model.
 
 \begin{figure}[htpb]
-\centerline{\includegraphics[scale = 0.33]{model.png}}
+\centerline{\includegraphics[scale = 0.31]{model.png}}
 \caption{Structure of the CNN model}
 \label{model}
 \end{figure}
