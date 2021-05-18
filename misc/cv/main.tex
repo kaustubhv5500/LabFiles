@@ -1,0 +1,210 @@
+% --- LaTeX CV Template - S. Venkatraman ---
+
+% Set document class and font size
+\documentclass[letterpaper, 11pt]{article}
+\usepackage[utf8]{inputenc}
+
+% Package imports
+\usepackage{setspace, longtable, graphicx, hyphenat, hyperref, fancyhdr, ifthen, everypage, enumitem, amsmath, setspace}
+
+% --- Page layout settings ---
+\usepackage{comment}
+% Set page margins
+\usepackage[left=1in, right=1in, bottom=0.7in, top=0.7in]{geometry}
+
+% Set line spacing
+\renewcommand{\baselinestretch}{1.15}
+
+% --- Page formatting ---
+
+% Set link colors
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{colorlinks=true, linkcolor=RoyalBlue, urlcolor=RoyalBlue}
+
+% Set font to Libertine, including math support
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+
+% Remove page numbering
+\pagenumbering{gobble}
+
+% --- Document starts here ---
+
+\begin{document}
+
+% Name and date of last update to this document
+\noindent{\Huge{Kaustubh Venkatesh}
+\hfill{\it\footnotesize Updated \today}}
+
+% --- Contact information and other items ---
+
+\vspace{0.5cm} 
+\begin{center}
+\begin{tabular}{lll}
+% Line 1: Email, GitHub, office location
+\textbf{Email}: kaustubhv@hotmail.com      &
+\hspace{0.55in} \textbf{GitHub}: kaustubhv5500    &
+\hspace{0.4in} 	\textbf{Address}: E-803, Anmol CHS,  \\
+
+% Line 2: Phone number, LinkedIn, citizenship
+\hspace{0.45in} kaustubh.v@spit.ac.in      &
+\hspace{0.55in} \textbf{Phone}: +91-8425909786   & 
+\hspace{0.4in} Goregaon West, Mumbai-104
+% \hspace{1.03in} Goregaon West, Mumbai
+\end{tabular}
+\end{center}
+
+% --- Start the two-column table storing the main content ---
+
+% Set spacing between columns
+\setlength{\tabcolsep}{8pt}
+
+% Set the width of each column
+\begin{longtable}{p{1.3in}p{4.8in}}
+
+% --- Section: Research interests ---
+
+\nohyphens{\color{OliveGreen}{Research interests}}
+& Digital Communication \& Signal Processing, RF System Design, Machine Learning \& Data Analytics, Neural networks \\
+& \\
+
+% --- Section: Education ---
+
+\color{OliveGreen}{Education} 
+& \textbf{Sardar Patel Institute of Technology} \hfill Mumbai, India \\ 
+& Bachelors in Electronics and Telecommunication Engineering \\
+& July 2018 -- Present \\
+& {\it GPA: 9.72/10}\\
+& \\
+
+& \textbf{R.N. Podar School} \hfill Mumbai, India \\
+& Grade 12\\
+& April 2016 -- May 2018\\
+& {\it Percentage: 97.7\%}\\
+& \\
+
+& \textbf{SSPM's Sri Sri Ravishankar Vidya Mandir} \hfill Mumbai, India\\
+& Grade 10 \\
+& 2010 -- March 2016 \\
+& {\it Cumulative GPA: 10}\\
+& \\
+
+% --- Uncomment the next few lines if you want to include some courses ---
+\color{OliveGreen}{Coursework}
+& \underline{Electronics} : Analog \& Digital Electronics, Microprocessors 
+\& Microcontrollers, Embedded Systems, Control Systems, Integrated Circuits, HDL Programming, PCB Design \& Soldering \\
+
+& \underline{Communications} : Analog \& Digital Communications, Digital Signal Processing, RF Antenna Design, Computer Networks, Random Signal Analysis \\
+
+& \underline{Electives} : Advanced Data Structures \& Algorithms, Statistics \& Data Analytics, Machine Learning, Law for Engineers, German Language\\
+ \\
+
+% --- Section: Awards, scholarships, etc. ---
+% --- Note: section title is spread over two lines ---
+
+{\color{OliveGreen}{Awards and}} 
+& \href{https://coursera.org/share/873ac303647846970ff59ac138eee553}{IT Fundamentals for Cyber Security by IBM}\\
+{\color{OliveGreen}{Certifications}} 
+& Microsoft Azure Fundamentals certification course by Ernst \& Young.\\
+& College to Corporate Training by JP Morgan \& Chase India Ltd. \\
+& Green Revolution Global Certification by the UNFCCC.\\
+% UN Framework Convention on Climate Change. \\
+& Awarded the ‘Academic Excellence Award’ for the year 2015-2016. \\
+& \\
+
+% --- Section: Publications ---
+\nohyphens{\color{OliveGreen}{Publications}} 
+& \textbf{Pneumonia Detection from Chest X-ray using Transfer Learning} \\
+& Sharvari Kalgutkar, Vansh Jain, Gokul Nair, Kaustubh Venkatesh, Kshitij Parab. \\
+& \textit{2021 IEEE 6th International Conference for Convergence in Technology (I2CT).}\\
+& DOI : \href{https://ieeexplore.ieee.org/document/9417872}{10.1109/I2CT51068.2021.9417872}\\
+\\
+
+& \textbf{Implementation of a Machine Learning based OFDM detector using GNU Radio} \\
+& Kaustubh Venkatesh, Gokul Nair, Sukanya Kulkarni. \\
+& \textit{2021 International Conference on Communication information and Computing Technology (ICCICT).}\\
+& DOI : add doi \\
+& \\
+
+& \textbf{Title of your third most recent research paper} \\
+& First author, second author, third author, fourth author. \\
+& \textit{Journal of something or the other, 2020.}\\
+& DOI : add doi \\
+& \\
+
+% --- Section: Industry experience ---
+
+{\color{OliveGreen}{Industry experience}} 
+& {\textbf{Location Guru Services Pvt. Ltd.}} \hfill Mumbai, India\\
+& Software Development Intern \hfill June 2019 – July 2019 \\
+& Developed an application / API to analyze location data and predict trends for phone carriers using Machine Learning in Python. \\
+& \\
+ 
+& {\textbf{Real World Promotions Pvt. Ltd.}} \hfill Mumbai, India\\
+& Software Development Intern \hfill October 2018 – January 2019 \\
+& Created Reporting Formats and Web Interfaces as well as helping in communicating with the field force for effective management of  resources.\\
+& \\
+
+
+
+% --- Section: Various skills (programming, software, languages, etc.) ---
+
+{\color{OliveGreen}{Skills}} 
+& \textbf{Programming}\\
+& Proficient in: Python, MATLAB, C. \\
+& Familiar with: Java, C++, R, ARM Assembly, MySQL, \LaTeX. \\
+& Platforms : VS Code, Anaconda, Arduino, Keil $\mu$Vision, ROS, Django, Proteus, Linux, Git, Wireshark \\
+& \\
+
+& \textbf{Languages} \\
+& English, Hindi, Tamil \\
+& \\
+
+% --- Section: Service and outreach ---
+
+\color{OliveGreen}{Service and outreach}
+& \textbf{Abhyudaya, An NGO founded by SPJIMR} \hfill July 2019 – March 2020 \\
+& Taught Mathematics and Science to underprivileged students from nearby schools. \\
+& \\
+
+% --- Section: Professional society memberships ---
+% --- Note: section title is spread over two lines ---
+
+{\color{OliveGreen}{Professional}} 
+& {\textbf{SPark, SPIT’s Official Editorial}} \hfill \\
+{\color{OliveGreen}{memberships}} 
+& Managing Editor, Columns \hfill August 2020 – Present \\
+& Senior Correspondent, Reporting \hfill August 2019 – May 2020\\
+& Junior Correspondent, Reporting \hfill August 2018 – May 2019 \\
+& \\
+& Wrote and edited various articles for the Editorial’s Website. Part of the organizing committee for SPIT’s Open Mic 2020 \& 2021. Part of the organizing committee for SPIT’s Model United Nations Conference, 2019. Official contributor for SPIT’s Annual Newsletter for 2019 and 2020.\\
+\\
+
+& {\textbf{IEEE Student Member}} \hfill May 2021 - December 2021\\
+& Bombay Section\\
+& \\
+\\
+
+% --- Section: References ---
+\nohyphens{\color{OliveGreen}{References}} 
+& \textbf{Add Reference 1} \\
+& Sardar Patel Institute of Technology. \\
+& Courses Taught : \\
+& \textit{Email : }\\
+& \\
+
+& \textbf{Add Reference 2} \\
+& Sardar Patel Institute of Technology. \\
+& Courses Taught : \\
+& \textit{Email : }\\
+& \\
+
+
+% --- Section: Other interests/hobbies ---
+
+\nohyphens{\color{OliveGreen}{Other interests}} & Online Gaming, Formula 1, Cricket\\
+
+% --- End of CV! ---
+
+\end{longtable}
+\end{document}
