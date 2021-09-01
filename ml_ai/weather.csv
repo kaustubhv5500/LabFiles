@@ -1,0 +1,11 @@
+Time,Sky,AirTemp,Humidity,Wind,Weather,Company,Forecast,Sport
+Morning,sunny,warm,normal,strong,warm,yes,same,yes
+Morning,sunny,warm,high,strong,cool,no,same,yes
+Evening,rainy,cold,high,mild,warm,yes,change,no
+Morning,sunny,warm,high,mild,cool,yes,same,yes
+Morning,rainy,cold,normal,mild,warm,yes,same,yes
+Evening,rainy,cold,high,strong,cool,no,change,no
+Morning,sunny,warm,normal,strong,warm,no,same,yes
+Evening,rainy,cold,normal,mild,cool,yes,same,no
+Evening,rainy,warm,normal,mild,warm,no,same,no
+Evening,rainy,warm,high,strong,warm,no,change,yes
