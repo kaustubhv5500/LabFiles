@@ -12,10 +12,10 @@ control_channels = ceil(0.15 * total_channels);
 clusters = input('Enter the Number of Clusters: ');
 
 traffic_channels = total_channels - control_channels;
-valid_clusters = [1 3 4 7 9 12 13];
+valid_clusters = [1 3 4 7 9 12 13 19 21 27 28 31 37 39 43 48 49 52];
 
 % Loop to Check if Cluster size is valid
-flag=0;
+flag = 0;
 for i=1:10
     for j=1:10
         if clusters == (i*i+j*j+i*j)
@@ -26,7 +26,7 @@ for i=1:10
 end
 
 % If cluster is invalid change to closest valid cluster size
-if flag == 0
+if ~ismember(clusters,valid_clusters)
     disp("Invalid Cluster Size!");
     [minValue,index] = min(abs(valid_clusters-clusters));
     closestClusterSize = valid_clusters(index);
@@ -56,7 +56,7 @@ for i=1:c_channels
                 mat_control(j,i) = num;
                 num = num + 1;
             else
-                mat_control(j,i)=0;
+                mat_control(j,i) = 0;
             end
         end
     end
@@ -69,12 +69,21 @@ disp('Traffic Channel Assignment: ');
 mat_traffic = zeros(clusters, t_channels);
 n = clusters * t_channels;
 x = 1;
+tmp = 0;
 for i = 1: t_channels
     for j = 1:clusters
         if x <= traffic_channels
             mat_traffic(j,i) = x;
             x = x + 1;
         else
+            mat_traffic(j,i) = 0;
+        end
+    end
+end
+
+for i=1:c_channels
+    for j=1:clusters
+        if mat_control(j,i) == 0
             mat_traffic(j,i) = 0;
         end
     end
