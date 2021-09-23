@@ -33,7 +33,7 @@ for i in range(int(cluster_size)):
 
 print('\nOriginal Channel Requirement', channel_req)
 
-if sum(channel_req) > total_channels * 0.15:
+if sum(channel_req) > total_channels:
     print('Channel requirement more than total number of available channels!!\nChanging channel allocation based on Blocking Probability.')
     channels_per_cell = math.ceil(total_channels / cluster_size)
     max_req = max(channel_req)
@@ -49,7 +49,7 @@ if sum(channel_req) > total_channels * 0.15:
     if sum(channel_req) > total_channels:
         channel_req[channel_req.index(max(channel_req))] -= abs(total_channels-channel_req)
     elif sum(channel_req) < total_channels:
-         channel_req[channel_req.index(min(channel_req))] += abs(total_channels-channel_req)
+         channel_req[channel_req.index(max(channel_req))] += abs(total_channels-channel_req)
 
     print('Updated Channel Requirement: ',channel_req)
 total_channels = int(total_channels)
