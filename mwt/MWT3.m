@@ -9,8 +9,8 @@ close;
 
 b = input('Enter the number of input bits: ');
 ln = input('Enter the number of Bits to be spread upon : ');
-% ln = length(b);
-b = randi([0 1], 1, ln);
+
+b = randi([0 1], 1, b);
 disp('Input Sequence: ');
 disp(b);
 
@@ -83,8 +83,8 @@ end
 % Modulating the signal
 dsss = [];
 t = 0:0.1:2*pi;
-c1 = sin(t);
-c2 = sin(t + pi);
+c1 = cos(t);
+c2 = cos(t + pi);
 
 for k = 1:len
     if bbs(1,k) == -1
