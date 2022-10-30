@@ -29,4 +29,5 @@ Languages and Environments used :
 - Automation Anywhere
 - Alteryx
 - Angular (Typescript, HTML, CSS, Bootstrap)
-- Arduino 
+- Arduino
+-SEQUEL Project Files 
